@@ -22,7 +22,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +32,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -140,7 +144,7 @@ public class XmlResponsesSaxParser {
                 Constants.DEFAULT_ENCODING));
             xr.setContentHandler(handler);
             xr.setErrorHandler(handler);
-            xr.parse(new InputSource(breader));
+            xr.parse(new InputSource(breader)); 
         } catch (Throwable t) {
             try {
                 inputStream.close();
@@ -218,6 +222,7 @@ public class XmlResponsesSaxParser {
      *         returns the string the caller passed in.
      */
     private String checkForEmptyString(String s) {
+    	System.out.println(s);
         if (s == null) return null;
         if (s.length() == 0) return null;
 
@@ -1107,6 +1112,62 @@ public class XmlResponsesSaxParser {
 
             if (name.equals("LastModified")) {
                 try {
+                	/*--Add 2013-01-03--*/
+                	String month="";
+                	String day="";
+                	String year="";
+                	String time="";                	
+                	elementText = elementText.substring(4);
+                	elementText = elementText.replace("GMT+08:00", "-");               	
+                	Pattern pat;
+                	Matcher mat;
+                	Boolean found;
+                	
+                	pat = Pattern.compile("[0-9][0-9]");
+                	mat = pat.matcher(elementText);
+                	found=mat.find();
+                	if(found==true)
+                	{day = mat.group();}
+                	
+                	pat = Pattern.compile("[a-zA-Z][a-z][a-z]");
+                	mat = pat.matcher(elementText);
+                	found=mat.find();
+                	if(found==true)
+                	{
+                		month = mat.group();
+                		if(month.equalsIgnoreCase("Jan")){month="01";}
+                    	else if(month.equalsIgnoreCase("Feb")){month="02";}
+                    	else if(month.equalsIgnoreCase("Mar")){month="03";}
+                    	else if(month.equalsIgnoreCase("Apr")){month="04";}
+                    	else if(month.equalsIgnoreCase("May")){month="05";}
+                    	else if(month.equalsIgnoreCase("Jun")){month="06";}
+                    	else if(month.equalsIgnoreCase("Jul")){month="07";}
+                    	else if(month.equalsIgnoreCase("Aug")){month="08";}
+                    	else if(month.equalsIgnoreCase("Sep")){month="09";}
+                    	else if(month.equalsIgnoreCase("Oct")){month="10";}
+                    	else if(month.equalsIgnoreCase("Nov")){month="11";}
+                    	else if(month.equalsIgnoreCase("Dec")){month="12";}
+                	}
+                	
+                	pat = Pattern.compile("[0-9][0-9][0-9][0-9]");
+                	mat = pat.matcher(elementText);
+                	found=mat.find();
+                	if(found==true)
+                	{year = mat.group();}
+                	
+                	pat = Pattern.compile("[0-9][0-9][:][0-9][0-9][:][0-9][0-9]");
+                	mat = pat.matcher(elementText);
+                	found=mat.find();
+                	if(found==true)
+                	{time = mat.group();}
+                	
+                   	DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                	Date temp = dateFormat.parse(time);
+                	temp.setHours(temp.getHours()-8);
+                	time = temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getMinutes();
+                	
+                	elementText = year + '-' + month + '-' + day + 'T' + time + 'Z';
+                	/*--Add 2013-01-03--*/
                     lastModified = ServiceUtils.parseIso8601Date(elementText);
                 } catch (ParseException e) {
                     throw new RuntimeException(
@@ -1213,31 +1274,31 @@ public class XmlResponsesSaxParser {
             if (name.equals("ListVersionsResult")) {
             } else if (name.equals("CommonPrefixes")) {
                 insideCommonPrefixes = true;
-            } else if (name.equals("Name")) {
-            } else if (name.equals("Prefix")) {
+            } else if (name.equals("Name")) { //1
+            } else if (name.equals("Prefix")) { //2
             } else if (name.equals("Delimiter")) {
-            } else if (name.equals("KeyMarker")) {
-            } else if (name.equals("VersionIdMarker")) {
-            } else if (name.equals("MaxKeys")) {
-            } else if (name.equals("NextKeyMarker")) {
+            } else if (name.equals("KeyMarker")) { //3
+            } else if (name.equals("VersionIdMarker")) { //4
+            } else if (name.equals("MaxKeys")) { //5
+            } else if (name.equals("NextKeyMarker")) { 
             } else if (name.equals("NextVersionIdMarker")) {
-            } else if (name.equals("IsTruncated")) {
-            } else if (name.equals("Version")) {
+            } else if (name.equals("IsTruncated")) { //6
+            } else if (name.equals("Version")) { //7
                 currentVersionSummary = new S3VersionSummary();
                 currentVersionSummary.setBucketName(versionListing.getBucketName());
             } else if (name.equals("DeleteMarker")) {
                 currentVersionSummary = new S3VersionSummary();
                 currentVersionSummary.setBucketName(versionListing.getBucketName());
                 currentVersionSummary.setIsDeleteMarker(true);
-            } else if (name.equals("Key")) {
-            } else if (name.equals("VersionId")) {
-            } else if (name.equals("IsLatest")) {
-            } else if (name.equals("LastModified")) {
-            } else if (name.equals("ETag")) {
-            } else if (name.equals("Size")) {
-            } else if (name.equals("Owner")) {
+            } else if (name.equals("Key")) { //7-1
+            } else if (name.equals("VersionId")) { //7-2
+            } else if (name.equals("IsLatest")) { //7-3
+            } else if (name.equals("LastModified")) { //7-4
+            } else if (name.equals("ETag")) { //7-5
+            } else if (name.equals("Size")) { //7-6
+            } else if (name.equals("Owner")) { //7-7
                 this.owner = new Owner();
-            } else if (name.equals("StorageClass")) {
+            } else if (name.equals("StorageClass")) { //7-8
             } else if (name.equals("ID")) {
             } else if (name.equals("DisplayName")) {
             } else {
@@ -1246,17 +1307,9 @@ public class XmlResponsesSaxParser {
             text.setLength(0);
         }
 
-        @Override
-        public void endElement(String uri, String name, String qName) throws SAXException {
-            if (name.equals("ListVersionsResult")) {
-                versionListing.setVersionSummaries(versionSummaries);
-            } else if (name.equals("Name")) {
-                versionListing.setBucketName(text.toString());
-            } else if (!insideCommonPrefixes && name.equals("Prefix")) {
-                versionListing.setPrefix(checkForEmptyString(text.toString()));
-            } else if (insideCommonPrefixes && name.equals("Prefix")) {
-                versionListing.getCommonPrefixes().add(checkForEmptyString(text.toString()));
-            } else if (name.equals("CommonPrefixes")) {
+        /**
+         * Original code
+         *     } else if (name.equals("CommonPrefixes")) {
                 insideCommonPrefixes = false;
             } else if (name.equals("KeyMarker")) {
                 versionListing.setKeyMarker(checkForEmptyString(text.toString()));
@@ -1319,6 +1372,122 @@ public class XmlResponsesSaxParser {
             } else if (name.equals("DisplayName")) {
                 assert(owner != null);
                 owner.setDisplayName(text.toString());
+            } else {
+                log.warn("Ignoring unexpected tag <"+name+">");
+            }
+         */
+        @Override
+        public void endElement(String uri, String name, String qName) throws SAXException {
+            if (name.equals("ListVersionsResult")) {
+                versionListing.setVersionSummaries(versionSummaries);
+            } else if (name.equals("Name")) {
+                versionListing.setBucketName(text.toString());
+            } else if (!insideCommonPrefixes && name.equals("Prefix")) {
+                versionListing.setPrefix(checkForEmptyString(text.toString()));
+            } else if (insideCommonPrefixes && name.equals("Prefix")) {
+                versionListing.getCommonPrefixes().add(checkForEmptyString(text.toString()));
+            } else if (name.equals("Delimiter")) {
+                versionListing.setDelimiter(checkForEmptyString(text.toString()));
+            } else if (name.equals("KeyMarker")) {
+                versionListing.setKeyMarker(checkForEmptyString(text.toString()));
+            } else if (name.equals("VersionIdMarker")) {
+                versionListing.setVersionIdMarker(checkForEmptyString(text.toString()));
+            } else if (name.equals("MaxKeys")) {
+                versionListing.setMaxKeys(Integer.parseInt(text.toString()));
+            } else if (name.equals("NextKeyMarker")) {
+                versionListing.setNextKeyMarker(text.toString());
+            } else if (name.equals("NextVersionIdMarker")) {
+                versionListing.setNextVersionIdMarker(text.toString());
+            } else if (name.equals("IsTruncated")) {
+                versionListing.setTruncated("true".equals(text.toString())); 
+            } else if (name.equals("Version")) {
+                assert(currentVersionSummary != null);
+                versionSummaries.add(currentVersionSummary);
+                currentVersionSummary = null;
+           } else if (name.equals("DeleteMarker")) {
+                assert(currentVersionSummary != null);
+                versionSummaries.add(currentVersionSummary);
+                currentVersionSummary = null;
+             } else if (name.equals("Key")) {
+                assert(currentVersionSummary != null);
+                currentVersionSummary.setKey(text.toString());
+            } else if (name.equals("VersionId")) {
+                assert(currentVersionSummary != null);
+                currentVersionSummary.setVersionId(text.toString());
+            } else if (name.equals("IsLatest")) {
+                assert(currentVersionSummary != null);
+                currentVersionSummary.setIsLatest("true".equals(text.toString()));
+            } else if (name.equals("LastModified")) {
+                assert(currentVersionSummary != null);
+                try {
+                	String elementText = text.toString();
+                   	String month="";
+                	String day="";
+                	String year="";
+                	String time="";                	
+                	elementText = elementText.replace("GMT+08:00", "-");               	
+                	Pattern pat;
+                	Matcher mat;
+                	Boolean found;
+                	
+                	pat = Pattern.compile("[-][0-9][0-9][-][0-9][0-9]");
+                	mat = pat.matcher(elementText);
+                	found=mat.find();
+                	if(found==true)
+                	{
+                		String temp = mat.group();
+                		month = temp.substring(1, 3);
+                		day = temp.substring(4, 6);
+                		
+                	}
+                	
+                	pat = Pattern.compile("[0-9][0-9][0-9][0-9]");
+                	mat = pat.matcher(elementText);
+                	found=mat.find();
+                	if(found==true)
+                	{year = mat.group();}
+                	
+                	pat = Pattern.compile("[0-9][0-9][:][0-9][0-9][:][0-9][0-9]");
+                	mat = pat.matcher(elementText);
+                	found=mat.find();
+                	if(found==true)
+                	{time = mat.group();}
+                	
+                   	DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                	Date temp = dateFormat.parse(time);
+                	temp.setHours(temp.getHours()-8);
+                	time = temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getMinutes();
+                	
+                	elementText = year + '-' + month + '-' + day + 'T' + time + 'Z';
+                    currentVersionSummary.setLastModified(ServiceUtils.parseIso8601Date(elementText));
+                } catch (ParseException e) {
+                    throw new SAXException(
+                        "Non-ISO8601 date for LastModified in copy object output: "
+                        + text.toString(), e);
+                }
+            } else if (name.equals("ETag")) {
+                assert(currentVersionSummary != null);
+                assert(!currentVersionSummary.isDeleteMarker());
+                currentVersionSummary.setETag(ServiceUtils.removeQuotes(text.toString()));
+            } else if (name.equals("Size")) {
+                assert(currentVersionSummary != null);
+                assert(!currentVersionSummary.isDeleteMarker());
+                currentVersionSummary.setSize(Long.parseLong(text.toString()));
+            } else if (name.equals("Owner")) {
+                currentVersionSummary.setOwner(owner);
+                owner = null;
+            } else if (name.equals("StorageClass")) {
+                assert(currentVersionSummary != null);
+                assert(!currentVersionSummary.isDeleteMarker());
+                currentVersionSummary.setStorageClass(text.toString());
+            } else if (name.equals("ID")) {
+                assert(owner != null);
+                owner.setId(text.toString());
+            } else if (name.equals("DisplayName")) {
+                assert(owner != null);
+                owner.setDisplayName(text.toString());
+            } else if (name.equals("CommonPrefixes")) {
+            	insideCommonPrefixes = false;
             } else {
                 log.warn("Ignoring unexpected tag <"+name+">");
             }
@@ -1712,92 +1881,184 @@ public class XmlResponsesSaxParser {
             text = new StringBuilder();
         }
 
+        /** 
+         * original config
+         * if (name.equals("ListMultipartUploadsResult")) {
+         *         result = new MultipartUploadListing();
+         *             } else if (name.equals("Bucket")) {//1
+         *                 } else if (name.equals("KeyMarker")) {//5
+         *                     } else if (name.equals("Delimiter")) { 
+         *                         } else if (name.equals("UploadIdMarker")) {//6
+         *                             } else if (name.equals("NextKeyMarker")) {//7
+         *                                 } else if (name.equals("NextUploadIdMarker")) {//8
+         *                                     } else if (name.equals("MaxUploads")) {//9
+         *                                        // } else if (name.equals("Prefix")) { //11
+         *                                            } else if (name.equals("IsTruncated")) {//10
+         *                                                } else if (name.equals("Upload")) { //12
+         *                                                        currentMultipartUpload = new MultipartUpload();
+         *                                                            } else if (name.equals("Key")) { //12-1
+         *                                                                } else if (name.equals("UploadId")) { //12-2
+         *                                                                    } else if (name.equals("Owner")) { //4
+         *                                                                            currentOwner = new Owner();
+         *                                                                                } else if (name.equals("Initiator")) { //12-3
+         *                                                                                        currentInitiator = new Owner(); //12/4
+         *                                                                                            } else if (name.equals("ID")) { //2
+         *                                                                                                } else if (name.equals("DisplayName")) {//3
+         *                                                                                                    } else if (name.equals("StorageClass")) {//12-5
+         *                                                                                                        } else if (name.equals("Initiated")) {//12-6
+         *                                                                                                            } else if (name.equals("CommonPrefixes")) {
+         *                                                                                                                    inCommonPrefixes = true;
+         *                                                                                                                        }
+         *                                                                                                                        */
         @Override
         public void startElement(String uri, String name, String qName, Attributes attrs) {
+        	/*--Add 2012-01-02--*/
             if (name.equals("ListMultipartUploadsResult")) {
                 result = new MultipartUploadListing();
-            } else if (name.equals("Bucket")) {
-            } else if (name.equals("KeyMarker")) {
-            } else if (name.equals("Delimiter")) {
-            } else if (name.equals("UploadIdMarker")) {
-            } else if (name.equals("NextKeyMarker")) {
-            } else if (name.equals("NextUploadIdMarker")) {
-            } else if (name.equals("MaxUploads")) {
-            } else if (name.equals("IsTruncated")) {
-            } else if (name.equals("Upload")) {
-                currentMultipartUpload = new MultipartUpload();
-            } else if (name.equals("Key")) {
-            } else if (name.equals("UploadId")) {
-            } else if (name.equals("Owner")) {
-                currentOwner = new Owner();
-            } else if (name.equals("Initiator")) {
-                currentInitiator = new Owner();
-            } else if (name.equals("ID")) {
-            } else if (name.equals("DisplayName")) {
-            } else if (name.equals("StorageClass")) {
-            } else if (name.equals("Initiated")) {
-            } else if (name.equals("CommonPrefixes")) {
+            } else if (name.equals("Bucket")) {//1
+            } else if (name.equals("ID")) { //2
+            } else if (name.equals("DisplayName")) {//3
+            } else if (name.equals("Owner")) { //4
+            	currentMultipartUpload = new MultipartUpload();
+            	currentOwner = new Owner();
+            } else if (name.equals("KeyMarker")) {//5 
+            } else if (name.equals("Delimiter")) { //??
+            } else if (name.equals("UploadIdMarker")) {//6
+            } else if (name.equals("NextKeyMarker")) {//7
+            } else if (name.equals("NextUploadIdMarker")) {//8
+            } else if (name.equals("MaxUploads")) {//9
+            } else if (name.equals("IsTruncated")) {//10
+            } else if (name.equals("Prefix")) { //11
+            } else if (name.equals("Upload")) { //12
+                //currentMultipartUpload = new MultipartUpload();
+            } else if (name.equals("Key")) { //12-1
+            } else if (name.equals("UploadId")) { //12-2
+            } else if (name.equals("Initiator")) { //12-3
+                currentInitiator = new Owner(); //12/4
+            } else if (name.equals("StorageClass")) {//12-5
+            } else if (name.equals("Initiated")) {//12-6
+            } else if (name.equals("CommonPrefixes")) {//13
                 inCommonPrefixes = true;
             }
+            /*--Add 2012-01-02--*/
             text.setLength(0);
         }
 
+        /* Original config 
+        *  if (name.equals("ListMultipartUploadsResult")) {
+        *  } else if (name.equals("Bucket")) {
+        *      result.setBucketName(text.toString());
+        *  } else if (name.equals("KeyMarker")) {
+        *      result.setKeyMarker(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("Delimiter")) {
+        *      result.setDelimiter(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("Prefix") && inCommonPrefixes == false) {
+        *      result.setPrefix(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("Prefix") && inCommonPrefixes == true) {
+        *      result.getCommonPrefixes().add(text.toString());
+        *  } else if (name.equals("UploadIdMarker")) {
+        *      result.setUploadIdMarker(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("NextKeyMarker")) {
+        *      result.setNextKeyMarker(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("NextUploadIdMarker")) {
+        *      result.setNextUploadIdMarker(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("MaxUploads")) {
+        *      result.setMaxUploads(Integer.parseInt(text.toString()));
+        *  } else if (name.equals("IsTruncated")) {
+        *      result.setTruncated(Boolean.parseBoolean(text.toString()));
+        *  } else if (name.equals("Upload")) {
+        *      result.getMultipartUploads().add(currentMultipartUpload);
+        *  } else if (name.equals("Key")) {
+        *      currentMultipartUpload.setKey(text.toString());
+        *  } else if (name.equals("UploadId")) {
+        *      currentMultipartUpload.setUploadId(text.toString());
+        *  } else if (name.equals("Owner")) {
+        *      currentMultipartUpload.setOwner(currentOwner); 
+        *      currentOwner = null;
+        *  } else if (name.equals("Initiator")) {
+        *      currentMultipartUpload.setInitiator(currentInitiator);
+        *      currentInitiator = null;
+        *  } else if (name.equals("ID") && currentOwner != null) {
+        *      currentOwner.setId(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("DisplayName") && currentOwner != null) {
+        *      currentOwner.setDisplayName(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("ID") && currentInitiator != null) {
+        *      currentInitiator.setId(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("DisplayName") && currentInitiator != null) {
+        *      currentInitiator.setDisplayName(checkForEmptyString(text.toString()));
+        *  } else if (name.equals("StorageClass")) {
+        *      currentMultipartUpload.setStorageClass(text.toString());
+        *  } else if (name.equals("Initiated")) {
+        *      try {
+        *          currentMultipartUpload.setInitiated(ServiceUtils.parseIso8601Date(text.toString()));
+        *      } catch (ParseException e) {
+        *          throw new SAXException(
+        *                  "Non-ISO8601 date for Initiated in initiate multipart upload result: "
+        *                  + text.toString(), e);
+        *      }
+        *  } else if (name.equals("CommonPrefixes")) {
+        *      inCommonPrefixes = false;
+        *  }
+        */
         @Override
         public void endElement(String uri, String name, String qName) throws SAXException {
-            if (name.equals("ListMultipartUploadsResult")) {
-            } else if (name.equals("Bucket")) {
-                result.setBucketName(text.toString());
-            } else if (name.equals("KeyMarker")) {
-                result.setKeyMarker(checkForEmptyString(text.toString()));
-            } else if (name.equals("Delimiter")) {
-                result.setDelimiter(checkForEmptyString(text.toString()));
-            } else if (name.equals("Prefix") && inCommonPrefixes == false) {
-                result.setPrefix(checkForEmptyString(text.toString()));
-            } else if (name.equals("Prefix") && inCommonPrefixes == true) {
-                result.getCommonPrefixes().add(text.toString());
-            } else if (name.equals("UploadIdMarker")) {
-                result.setUploadIdMarker(checkForEmptyString(text.toString()));
-            } else if (name.equals("NextKeyMarker")) {
-                result.setNextKeyMarker(checkForEmptyString(text.toString()));
-            } else if (name.equals("NextUploadIdMarker")) {
-                result.setNextUploadIdMarker(checkForEmptyString(text.toString()));
-            } else if (name.equals("MaxUploads")) {
-                result.setMaxUploads(Integer.parseInt(text.toString()));
-            } else if (name.equals("IsTruncated")) {
-                result.setTruncated(Boolean.parseBoolean(text.toString()));
-            } else if (name.equals("Upload")) {
-                result.getMultipartUploads().add(currentMultipartUpload);
-            } else if (name.equals("Key")) {
-                currentMultipartUpload.setKey(text.toString());
-            } else if (name.equals("UploadId")) {
-                currentMultipartUpload.setUploadId(text.toString());
-            } else if (name.equals("Owner")) {
-                currentMultipartUpload.setOwner(currentOwner);
-                currentOwner = null;
-            } else if (name.equals("Initiator")) {
-                currentMultipartUpload.setInitiator(currentInitiator);
-                currentInitiator = null;
-            } else if (name.equals("ID") && currentOwner != null) {
-                currentOwner.setId(checkForEmptyString(text.toString()));
-            } else if (name.equals("DisplayName") && currentOwner != null) {
-                currentOwner.setDisplayName(checkForEmptyString(text.toString()));
-            } else if (name.equals("ID") && currentInitiator != null) {
-                currentInitiator.setId(checkForEmptyString(text.toString()));
-            } else if (name.equals("DisplayName") && currentInitiator != null) {
-                currentInitiator.setDisplayName(checkForEmptyString(text.toString()));
-            } else if (name.equals("StorageClass")) {
-                currentMultipartUpload.setStorageClass(text.toString());
-            } else if (name.equals("Initiated")) {
-                try {
-                    currentMultipartUpload.setInitiated(ServiceUtils.parseIso8601Date(text.toString()));
-                } catch (ParseException e) {
-                    throw new SAXException(
-                            "Non-ISO8601 date for Initiated in initiate multipart upload result: "
-                            + text.toString(), e);
-                }
-            } else if (name.equals("CommonPrefixes")) {
-                inCommonPrefixes = false;
-            }
+        	/*--Add 2012-01-02--*/
+        	   if (name.equals("ListMultipartUploadsResult")) {
+               } else if (name.equals("Bucket")) {//1
+                   result.setBucketName(text.toString());
+               } else if (name.equals("ID")) { //2
+               } else if (name.equals("DisplayName")) { //3
+               } else if (name.equals("Owner")) {//4
+                   currentMultipartUpload.setOwner(currentOwner); 
+                   currentOwner = null;
+               } else if (name.equals("KeyMarker")) {//5
+                   result.setKeyMarker(checkForEmptyString(text.toString()));
+               } else if (name.equals("Delimiter")) {//??
+                   result.setDelimiter(checkForEmptyString(text.toString()));
+               } else if (name.equals("UploadIdMarker")) {//6
+                   result.setUploadIdMarker(checkForEmptyString(text.toString()));
+               } else if (name.equals("NextKeyMarker")) {//7
+                   result.setNextKeyMarker(checkForEmptyString(text.toString()));
+               } else if (name.equals("NextUploadIdMarker")) {//8
+                   result.setNextUploadIdMarker(checkForEmptyString(text.toString()));
+               } else if (name.equals("MaxUploads")) {//9
+                   result.setMaxUploads(Integer.parseInt(text.toString()));
+               } else if (name.equals("IsTruncated")) {//10
+                   result.setTruncated(Boolean.parseBoolean(text.toString()));
+               } else if (name.equals("Prefix") && inCommonPrefixes == false) {//11
+                   result.setPrefix(checkForEmptyString(text.toString()));
+               } else if (name.equals("Prefix") && inCommonPrefixes == true) {//11
+                   result.getCommonPrefixes().add(text.toString());
+               } else if (name.equals("Upload")) {
+                   result.getMultipartUploads().add(currentMultipartUpload);
+               } else if (name.equals("Key")) {
+                   currentMultipartUpload.setKey(text.toString());
+               } else if (name.equals("UploadId")) {
+                   currentMultipartUpload.setUploadId(text.toString());
+               } else if (name.equals("Initiator")) {
+                   currentMultipartUpload.setInitiator(currentInitiator);
+                   currentInitiator = null;
+               } else if (name.equals("ID") && currentOwner != null) {
+                   currentOwner.setId(checkForEmptyString(text.toString()));
+               } else if (name.equals("DisplayName") && currentOwner != null) {
+                   currentOwner.setDisplayName(checkForEmptyString(text.toString()));
+               } else if (name.equals("ID") && currentInitiator != null) {
+                   currentInitiator.setId(checkForEmptyString(text.toString()));
+               } else if (name.equals("DisplayName") && currentInitiator != null) {
+                   currentInitiator.setDisplayName(checkForEmptyString(text.toString()));
+               } else if (name.equals("StorageClass")) {
+                   currentMultipartUpload.setStorageClass(text.toString());
+               } else if (name.equals("Initiated")) {
+                   try {
+                       currentMultipartUpload.setInitiated(ServiceUtils.parseIso8601Date(text.toString()));
+                   } catch (ParseException e) {
+                       throw new SAXException(
+                               "Non-ISO8601 date for Initiated in initiate multipart upload result: "
+                               + text.toString(), e);
+                   }
+               } else if (name.equals("CommonPrefixes")) {
+                   inCommonPrefixes = false;
+               }
         }
 
         @Override

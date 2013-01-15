@@ -567,17 +567,21 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         assertParameterNotNull(bucketName,
                 "The bucket name parameter must be specified when creating a bucket");
 
-        if (bucketName != null) bucketName = bucketName.trim();
-        bucketNameUtils.validateBucketName(bucketName);
+        if (bucketName != null) bucketName = bucketName.trim(); //去除字串頭尾空白字元
+        bucketNameUtils.validateBucketName(bucketName); //check bucket name available or not
 
+        //create default Request (prepare...)
         Request<CreateBucketRequest> request = createRequest(bucketName, null, createBucketRequest, HttpMethodName.PUT);
 
         if ( createBucketRequest.getAccessControlList() != null ) {
-            addAclHeaders(request, createBucketRequest.getAccessControlList());
+            addAclHeaders(request, createBucketRequest.getAccessControlList()); //add acl header to request
         } else if ( createBucketRequest.getCannedAcl() != null ) {
-            request.addHeader(Headers.S3_CANNED_ACL, createBucketRequest.getCannedAcl().toString());
+            request.addHeader(Headers.S3_CANNED_ACL, createBucketRequest.getCannedAcl().toString()); //add canned acl
         }
 
+        /*----------Add 2012/12/17--------------------------*/
+        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
+        
         /*
          * If we're talking to a region-specific endpoint other than the US, we
          * *must* specify a location constraint. Try to derive the region from
@@ -1031,8 +1035,8 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
                 try {fileInputStream.close();} catch (Exception e) {}
             }
 
-            try {
-                input = new RepeatableFileInputStream(file);
+            try {//A repeatable input stream for files. This input stream can be repeated an unlimited number of times
+                input = new RepeatableFileInputStream(file); 
             } catch (FileNotFoundException fnfe) {
                 throw new AmazonClientException("Unable to find file to upload", fnfe);
             }
@@ -1071,12 +1075,13 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
                      "out of memory errors.");
         }
 
+        //Simple InputStream wrapper that occasionally notifies a progress listener about the number of bytes transfered.
         if (progressListener != null) {
             input = new ProgressReportingInputStream(input, progressListener);
             fireProgressEvent(progressListener, ProgressEvent.STARTED_EVENT_CODE);
         }
 
-        if (!input.markSupported()) {
+        if (!input.markSupported()) { //測試此輸入流是否支持 mark 和 reset 方法
             int streamBufferSize = Constants.DEFAULT_STREAM_BUFFER_SIZE;
             String bufferSizeOverride = System.getProperty("com.amazonaws.sdk.s3.defaultStreamBufferSize");
             if (bufferSizeOverride != null) {
@@ -1088,7 +1093,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             }
 
             input = new RepeatableInputStream(input, streamBufferSize);
-        }
+        } //not sure ??
 
         MD5DigestCalculatingInputStream md5DigestStream = null;
         if (metadata.getContentMD5() == null) {
@@ -1107,7 +1112,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             }
         }
 
-        if (metadata.getContentType() == null) {
+        if (metadata.getContentType() == null) { //check again
             /*
              * Default to the "application/octet-stream" if the user hasn't
              * specified a content type.
@@ -1533,6 +1538,9 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         Request<SetBucketVersioningConfigurationRequest> request = createRequest(bucketName, null, setBucketVersioningConfigurationRequest, HttpMethodName.PUT);
         request.addParameter("versioning", null);
 
+        /*--Add 2012-12-27--*/
+        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
+        
         if (versioningConfiguration.isMfaDeleteEnabled() != null) {
             if (setBucketVersioningConfigurationRequest.getMfa() != null) {
                 populateRequestWithMfaDetails(request, setBucketVersioningConfigurationRequest.getMfa());
@@ -1868,6 +1876,9 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         Request<SetBucketLoggingConfigurationRequest> request = createRequest(bucketName, null, setBucketLoggingConfigurationRequest, HttpMethodName.PUT);
         request.addParameter("logging", null);
+        
+        /*--2012-12-27-*/
+        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
 
         byte[] bytes = bucketConfigurationXmlFactory.convertToXmlByteArray(loggingConfiguration);
         request.setContent(new ByteArrayInputStream(bytes));
@@ -1895,6 +1906,10 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         Request<GenericBucketRequest> request = createRequest(bucketName, null, new GenericBucketRequest(bucketName), HttpMethodName.PUT);
         request.addParameter("policy", null);
+        
+        /*--2012-12-27--*/
+        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
+        
         request.setContent(new ByteArrayInputStream(ServiceUtils.toByteArray(policyText)));
 
         invoke(request, voidResponseHandler, bucketName, null);
@@ -2128,6 +2143,9 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         Request<InitiateMultipartUploadRequest> request = createRequest(initiateMultipartUploadRequest.getBucketName(), initiateMultipartUploadRequest.getKey(), initiateMultipartUploadRequest, HttpMethodName.POST);
         request.addParameter("uploads", null);
 
+        /*--Add 2012-12-27--*/
+        request.addHeader(Headers.CONTENT_LENGTH, "0");
+        
         if (initiateMultipartUploadRequest.getStorageClass() != null)
             request.addHeader(Headers.STORAGE_CLASS, initiateMultipartUploadRequest.getStorageClass().toString());
 
@@ -2146,6 +2164,10 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         // Be careful that we don't send the object's total size as the content
         // length for the InitiateMultipartUpload request.
         request.getHeaders().remove(Headers.CONTENT_LENGTH);
+        
+        /*--Add 2012-12-27--*/
+        request.addHeader(Headers.CONTENT_LENGTH, "0");
+        
         // Set the request content to be empty (but not null) to force the runtime to pass
         // any query params in the query string and not the request body, to keep S3 happy.
         request.setContent(new ByteArrayInputStream(new byte[0]));
@@ -2238,6 +2260,8 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             request.addHeader(Headers.CONTENT_MD5, uploadPartRequest.getMd5Digest());
 
         request.addHeader(Headers.CONTENT_LENGTH, Long.toString(partSize));
+        /*--Add 2012-01-02--*/
+        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
 
         InputStream inputStream = null;
         if (uploadPartRequest.getInputStream() != null) {
@@ -2587,11 +2611,11 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
      *            The metadata containing the header information to include in
      *            the request.
      */
-    protected static void populateRequestMetadata(Request<?> request, ObjectMetadata metadata) {
+    protected static void populateRequestMetadata(Request<?> request, ObjectMetadata metadata) { //塞metadata到header中
         Map<String, Object> rawMetadata = metadata.getRawMetadata();
         if (rawMetadata != null) {
             for (Entry<String, Object> entry : rawMetadata.entrySet()) {
-                request.addHeader(entry.getKey(), entry.getValue().toString());
+                request.addHeader(entry.getKey(), entry.getValue().toString());  
             }
         }
 

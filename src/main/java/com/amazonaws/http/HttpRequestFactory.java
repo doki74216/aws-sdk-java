@@ -19,6 +19,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Map.Entry;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -113,7 +114,7 @@ class HttpRequestFactory {
              * don't want to do this for all operations since it will cause
              * extra latency in the network interaction.
              */
-            putMethod.getParams().setParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, true);
+            putMethod.getParams().setParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, true); //change to false?
 
             if (previousEntity != null) {
                 putMethod.setEntity(previousEntity);

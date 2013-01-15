@@ -20,7 +20,8 @@ package com.amazonaws.services.s3.internal;
 public class Constants {
 
     /** Default hostname for the S3 service endpoint */
-    public static String S3_HOSTNAME = "s3.amazonaws.com";
+    public static String S3_HOSTNAME = "s3.cht";
+	//public static String S3_HOSTNAME = "s3.hicloud.net.tw";
 
     /** Service name for Amazon S3 */
     public static String S3_SERVICE_NAME = "Amazon S3";

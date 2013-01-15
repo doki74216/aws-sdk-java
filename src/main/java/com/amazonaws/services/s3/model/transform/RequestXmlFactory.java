@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.amazonaws.AmazonClientException;
+import com.amazonaws.services.s3.internal.Constants;
 import com.amazonaws.services.s3.internal.XmlWriter;
 import com.amazonaws.services.s3.model.PartETag;
 import com.amazonaws.services.s3.model.RestoreObjectRequest;
@@ -37,7 +38,10 @@ public class RequestXmlFactory {
      */
     public static byte[] convertToXmlByteArray(List<PartETag> partETags) {
         XmlWriter xml = new XmlWriter();
-        xml.start("CompleteMultipartUpload");
+        /*--Add 201201-02--*/
+        xml.start("CompleteMultipartUpload", "xmlns", Constants.XML_NAMESPACE);
+        
+       // xml.start("CompleteMultipartUpload");
         if (partETags != null) {
             Collections.sort(partETags, new Comparator<PartETag>() {
                 public int compare(PartETag tag1, PartETag tag2) {

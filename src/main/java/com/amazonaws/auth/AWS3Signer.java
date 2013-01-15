@@ -64,7 +64,7 @@ public class AWS3Signer extends AbstractAWSSigner {
             return;
         }
 
-        AWSCredentials sanitizedCredentials = sanitizeCredentials(credentials);
+        AWSCredentials sanitizedCredentials = sanitizeCredentials(credentials); //取得access key, secret key 並消去空白
 
         SigningAlgorithm algorithm = SigningAlgorithm.HmacSHA256;
         String nonce = UUID.randomUUID().toString();
