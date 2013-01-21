@@ -54,7 +54,7 @@ import com.amazonaws.services.s3.model.DeleteObjectsResult;
 import com.amazonaws.services.s3.model.DeleteVersionRequest;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.GetBucketAclRequest;
-//import com.amazonaws.services.s3.model.GetBucketLocationRequest;
+import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 import com.amazonaws.services.s3.model.GetBucketPolicyRequest;
 import com.amazonaws.services.s3.model.GetBucketWebsiteConfigurationRequest;
 import com.amazonaws.services.s3.model.GetObjectMetadataRequest;
@@ -2653,7 +2653,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve lifecycle
      *            configuration.
      */
-    public BucketLifecycleConfiguration getBucketLifecycleConfiguration(String bucketName);
+  //  public BucketLifecycleConfiguration getBucketLifecycleConfiguration(String bucketName);
 
     /**
      * Sets the lifecycle configuration for the specified bucket.
@@ -2665,7 +2665,7 @@ public interface AmazonS3 {
      *            The new lifecycle configuration for this bucket, which
      *            completely replaces any existing configuration.
      */
-    public void setBucketLifecycleConfiguration(String bucketName, BucketLifecycleConfiguration bucketLifecycleConfiguration);
+  //  public void setBucketLifecycleConfiguration(String bucketName, BucketLifecycleConfiguration bucketLifecycleConfiguration);
 
     /**
      * Removes the lifecycle configuration for the bucket specified.
@@ -2674,7 +2674,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to remove the lifecycle
      *            configuration.
      */
-    public void deleteBucketLifecycleConfiguration(String bucketName);
+  //  public void deleteBucketLifecycleConfiguration(String bucketName);
 
     /**
      * Gets the cross origin configuration for the specified bucket, or null if no
@@ -2684,7 +2684,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve cross origin
      *            configuration.
      */
-    public BucketCrossOriginConfiguration getBucketCrossOriginConfiguration(String bucketName);
+   // public BucketCrossOriginConfiguration getBucketCrossOriginConfiguration(String bucketName);
 
     /**
      * Sets the cross origin configuration for the specified bucket.
@@ -2696,7 +2696,7 @@ public interface AmazonS3 {
      * 			  The new cross origin configuration for this bucket, which
      *            completely replaces any existing configuration.
      */
-    public void setBucketCrossOriginConfiguration(String bucketName, BucketCrossOriginConfiguration bucketCrossOriginConfiguration);
+  //  public void setBucketCrossOriginConfiguration(String bucketName, BucketCrossOriginConfiguration bucketCrossOriginConfiguration);
 
     /**
      * Delete the cross origin configuration for the specified bucket.
@@ -2705,7 +2705,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve cross origin
      *            configuration.
      */
-    public void deleteBucketCrossOriginConfiguration(String bucketName);
+  //  public void deleteBucketCrossOriginConfiguration(String bucketName);
 
     /**
      * Gets the tagging configuration for the specified bucket, or null if no
@@ -2715,7 +2715,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve tagging
      *            configuration.
      */
-    public BucketTaggingConfiguration getBucketTaggingConfiguration(String bucketName);
+   // public BucketTaggingConfiguration getBucketTaggingConfiguration(String bucketName);
 
     /**
      * Sets the tagging configuration for the specified bucket.
@@ -2727,7 +2727,7 @@ public interface AmazonS3 {
      *            The new tagging configuration for this bucket, which
      *            completely replaces any existing configuration.
      */
-    public void setBucketTaggingConfiguration(String bucketName, BucketTaggingConfiguration bucketTaggingConfiguration);
+ //   public void setBucketTaggingConfiguration(String bucketName, BucketTaggingConfiguration bucketTaggingConfiguration);
 
     /**
      * Removes the Tagging configuration for the bucket specified.
@@ -2736,7 +2736,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to remove the tagging
      *            configuration.
      */
-    public void deleteBucketTaggingConfiguration(String bucketName);
+   // public void deleteBucketTaggingConfiguration(String bucketName);
 
     /**
      * Gets the notification configuration for the specified bucket.
@@ -2768,9 +2768,9 @@ public interface AmazonS3 {
      *             If any errors occurred in Amazon S3 while processing the
      *             request.
      */
-    public BucketNotificationConfiguration getBucketNotificationConfiguration(String bucketName)
+ /*   public BucketNotificationConfiguration getBucketNotificationConfiguration(String bucketName)
         throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * Sets the notification configuration for the specified bucket.
      * <p>
@@ -2803,9 +2803,9 @@ public interface AmazonS3 {
      *             If any errors occurred in Amazon S3 while processing the
      *             request.
      */
-    public void setBucketNotificationConfiguration(String bucketName, BucketNotificationConfiguration bucketNotificationConfiguration)
+ /*   public void setBucketNotificationConfiguration(String bucketName, BucketNotificationConfiguration bucketNotificationConfiguration)
         throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * Returns the website configuration for the specified bucket. Bucket
      * website configuration allows you to host your static websites entirely
