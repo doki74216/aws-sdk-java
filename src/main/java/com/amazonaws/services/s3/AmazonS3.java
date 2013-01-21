@@ -54,7 +54,7 @@ import com.amazonaws.services.s3.model.DeleteObjectsResult;
 import com.amazonaws.services.s3.model.DeleteVersionRequest;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.GetBucketAclRequest;
-import com.amazonaws.services.s3.model.GetBucketLocationRequest;
+//import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 import com.amazonaws.services.s3.model.GetBucketPolicyRequest;
 import com.amazonaws.services.s3.model.GetBucketWebsiteConfigurationRequest;
 import com.amazonaws.services.s3.model.GetObjectMetadataRequest;
@@ -867,9 +867,9 @@ public interface AmazonS3 {
      *
      * @see Region
      */
-    public String getBucketLocation(String bucketName) throws AmazonClientException,
+   /* public String getBucketLocation(String bucketName) throws AmazonClientException,
             AmazonServiceException;
-
+   */
     /**
      * <p>
      * Gets the geographical region where Amazon S3 stores the specified
@@ -905,9 +905,9 @@ public interface AmazonS3 {
      *
      * @see Region
      */
-    public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
+  /*  public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
         throws AmazonClientException, AmazonServiceException;
-
+  */
     /**
      * <p>
      * Creates a new Amazon S3 bucket in the default

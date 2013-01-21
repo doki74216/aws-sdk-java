@@ -111,7 +111,7 @@ import com.amazonaws.services.s3.model.DeleteVersionRequest;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.GenericBucketRequest;
 import com.amazonaws.services.s3.model.GetBucketAclRequest;
-import com.amazonaws.services.s3.model.GetBucketLocationRequest;
+//import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 import com.amazonaws.services.s3.model.GetBucketPolicyRequest;
 import com.amazonaws.services.s3.model.GetBucketWebsiteConfigurationRequest;
 import com.amazonaws.services.s3.model.GetObjectMetadataRequest;
@@ -510,7 +510,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#getBucketLocation(com.amazonaws.services.s3.AmazonS3Client.GetBucketLocationRequest)
      */
-    public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
+  /*  public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
             throws AmazonClientException, AmazonServiceException {
         assertParameterNotNull(getBucketLocationRequest, "The request parameter must be specified when requesting a bucket's location");
         String bucketName = getBucketLocationRequest.getBucketName();
@@ -521,15 +521,15 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         return invoke(request, new Unmarshallers.BucketLocationUnmarshaller(), bucketName, null);
     }
-
+  */
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#getBucketLocation(java.lang.String)
      */
-    public String getBucketLocation(String bucketName)
+   /* public String getBucketLocation(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         return getBucketLocation(new GetBucketLocationRequest(bucketName));
     }
-
+   */
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#createBucket(java.lang.String)
      */
