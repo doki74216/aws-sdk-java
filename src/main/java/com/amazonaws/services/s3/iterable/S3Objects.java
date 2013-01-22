@@ -139,9 +139,9 @@ public class S3Objects implements Iterable<S3ObjectSummary> {
                     req.setPrefix(getPrefix());
                     req.setMaxKeys(getBatchSize());
                     currentListing = getS3().listObjects(req);
-                } else {
+                } /*else {
                     currentListing = getS3().listNextBatchOfObjects(currentListing);
-                }
+                }*/
 
                 currentIterator = currentListing.getObjectSummaries().iterator();
             }

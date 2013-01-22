@@ -350,7 +350,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#listNextBatchOfVersions(com.amazonaws.services.s3.model.S3VersionListing)
      */
-    public VersionListing listNextBatchOfVersions(VersionListing previousVersionListing)
+ /*   public VersionListing listNextBatchOfVersions(VersionListing previousVersionListing)
             throws AmazonClientException, AmazonServiceException {
         assertParameterNotNull(previousVersionListing,
             "The previous version listing parameter must be specified when listing the next batch of versions in a bucket");
@@ -375,7 +375,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
                 previousVersionListing.getNextVersionIdMarker(),
                 previousVersionListing.getDelimiter(),
                 new Integer( previousVersionListing.getMaxKeys() ) ));
-    }
+    }*/
 
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#listVersions(java.lang.String, java.lang.String)
@@ -455,7 +455,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#listNextBatchOfObjects(com.amazonaws.services.s3.model.S3ObjectListing)
      */
-    public ObjectListing listNextBatchOfObjects(ObjectListing previousObjectListing)
+/*    public ObjectListing listNextBatchOfObjects(ObjectListing previousObjectListing)
             throws AmazonClientException, AmazonServiceException {
         assertParameterNotNull(previousObjectListing,
                 "The previous object listing parameter must be specified when listing the next batch of objects in a bucket");
@@ -479,17 +479,17 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
                 previousObjectListing.getDelimiter(),
                 new Integer( previousObjectListing.getMaxKeys() ) ));
     }
-
+*/
 
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#getS3AccountOwner()
      */
-    public Owner getS3AccountOwner()
+ /*   public Owner getS3AccountOwner()
             throws AmazonClientException, AmazonServiceException {
         Request<ListBucketsRequest> request = createRequest(null, null, new ListBucketsRequest(), HttpMethodName.GET);
         return invoke(request, new Unmarshallers.ListBucketsOwnerUnmarshaller(), null, null);
     }
-
+*/
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#listBuckets()
      */
@@ -782,7 +782,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#doesBucketExist(java.lang.String)
      */
-    public boolean doesBucketExist(String bucketName)
+/*    public boolean doesBucketExist(String bucketName)
         throws AmazonClientException, AmazonServiceException {
 
         try {
@@ -796,7 +796,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
              * credentials we used, go ahead and throw the error so we don't
              * mask that problem as thinking that the bucket does exist.
              */
-            if (awsCredentialsProvider.getCredentials() == null) throw ase;
+  /*          if (awsCredentialsProvider.getCredentials() == null) throw ase;
             if (ase.getErrorCode().equalsIgnoreCase("InvalidAccessKeyId") ||
                 ase.getErrorCode().equalsIgnoreCase("SignatureDoesNotMatch")) {
                 throw ase;
@@ -816,11 +816,11 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             }
         }
     }
-
+*/
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#changeStorageClass(java.lang.String, java.lang.String, java.lang.String)
      */
-    public void changeObjectStorageClass(String bucketName, String key, StorageClass newStorageClass)
+/*    public void changeObjectStorageClass(String bucketName, String key, StorageClass newStorageClass)
         throws AmazonClientException, AmazonServiceException {
         assertParameterNotNull(bucketName,
             "The bucketName parameter must be specified when changing an object's storage class");
@@ -831,12 +831,12 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         copyObject(new CopyObjectRequest(bucketName, key, bucketName, key)
             .withStorageClass(newStorageClass.toString()));
-    }
+    }*/
 
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#setObjectRedirectLocation(java.lang.String, java.lang.String, java.lang.String)
      */
-    public void setObjectRedirectLocation(String bucketName, String key, String newRedirectLocation)
+/*    public void setObjectRedirectLocation(String bucketName, String key, String newRedirectLocation)
         throws AmazonClientException, AmazonServiceException {
         assertParameterNotNull(bucketName,
             "The bucketName parameter must be specified when changing an object's storage class");
@@ -848,7 +848,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         copyObject(new CopyObjectRequest(bucketName, key, bucketName, key)
             .withRedirectLocation(newRedirectLocation));
     }
-
+*/
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#getObject(com.amazonaws.services.s3.model.GetObjectRequest)
      */
@@ -2003,26 +2003,26 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#generatePresignedUrl(java.lang.String, java.lang.String, java.util.Date)
      */
-    public URL generatePresignedUrl(String bucketName, String key, Date expiration)
+ /*   public URL generatePresignedUrl(String bucketName, String key, Date expiration)
             throws AmazonClientException {
         return generatePresignedUrl(bucketName, key, expiration, HttpMethod.GET);
     }
-
+*/
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#generatePresignedUrl(java.lang.String, java.lang.String, java.util.Date, com.amazonaws.HttpMethod)
      */
-    public URL generatePresignedUrl(String bucketName, String key, Date expiration, HttpMethod method)
+ /*   public URL generatePresignedUrl(String bucketName, String key, Date expiration, HttpMethod method)
             throws AmazonClientException {
         GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(bucketName, key, method);
         request.setExpiration(expiration);
 
         return generatePresignedUrl(request);
     }
-
+*/
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#generatePresignedUrl(com.amazonaws.services.s3.model.GeneratePresignedUrlRequest)
      */
-    public URL generatePresignedUrl(GeneratePresignedUrlRequest generatePresignedUrlRequest)
+/*    public URL generatePresignedUrl(GeneratePresignedUrlRequest generatePresignedUrlRequest)
             throws AmazonClientException {
         assertParameterNotNull(generatePresignedUrlRequest,
             "The request parameter must be specified when generating a pre-signed URL");
@@ -2057,7 +2057,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         return ServiceUtils.convertRequestToUrl(request);
     }
-
+*/
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#abortMultipartUpload(com.amazonaws.services.s3.model.AbortMultipartUploadRequest)
      */
@@ -2338,14 +2338,14 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#getResponseMetadataForRequest(com.amazonaws.AmazonWebServiceRequest)
      */
-    public S3ResponseMetadata getCachedResponseMetadata(AmazonWebServiceRequest request) {
+  /*  public S3ResponseMetadata getCachedResponseMetadata(AmazonWebServiceRequest request) {
         return (S3ResponseMetadata)client.getResponseMetadataForRequest(request);
     }
-
+  */
     /* (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#restoreObject(com.amazonaws.services.s3.model.RestoreObjectRequest)
      */
-    public void restoreObject(RestoreObjectRequest restoreObjectRequest)
+ /*   public void restoreObject(RestoreObjectRequest restoreObjectRequest)
             throws AmazonServiceException {
         String bucketName = restoreObjectRequest.getBucketName();
         String key = restoreObjectRequest.getKey();
@@ -2375,16 +2375,16 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         invoke(request, voidResponseHandler, bucketName, key);
     }
-
+*/    
     /** (non-Javadoc)
      * @see com.amazonaws.services.s3.AmazonS3#copyGlacierObject((java.lang.String, java.lang.String, int)
      */
-    public void restoreObject(String bucketName, String key, int expirationInDays)
+  /*  public void restoreObject(String bucketName, String key, int expirationInDays)
             throws AmazonServiceException {
         restoreObject(new RestoreObjectRequest(bucketName, key, expirationInDays));
     }
 
-
+*/
     /*
      * Private Interface
      */

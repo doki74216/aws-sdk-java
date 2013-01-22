@@ -182,10 +182,10 @@ public class S3Versions implements Iterable<S3VersionSummary> {
 
                     req.setMaxResults(getBatchSize());
                     currentListing = getS3().listVersions(req);
-                } else {
+                } /*else {
                     currentListing = getS3().listNextBatchOfVersions(
                             currentListing);
-                }
+                }*/
                 currentIterator = currentListing.getVersionSummaries()
                         .iterator();
             }
