@@ -558,9 +558,9 @@ public class TransferManager {
                     ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(bucketName)
                             .withDelimiter(DEFAULT_DELIMITER).withPrefix(prefix);
                     listObjectsResponse = s3.listObjects(listObjectsRequest);
-                } else {
+                }/* else {
                     listObjectsResponse = s3.listNextBatchOfObjects(listObjectsResponse);
-                }
+                }*/
 
                 for ( S3ObjectSummary s : listObjectsResponse.getObjectSummaries() ) {
                     // Skip any files that are also virtual directories, since

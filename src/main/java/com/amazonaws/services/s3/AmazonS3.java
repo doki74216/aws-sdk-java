@@ -161,9 +161,9 @@ public interface AmazonS3 {
      *             If any errors occurred in Amazon S3 while processing the
      *             request.
      */
-    public void changeObjectStorageClass(String bucketName, String key, StorageClass newStorageClass)
+/*   public void changeObjectStorageClass(String bucketName, String key, StorageClass newStorageClass)
         throws AmazonClientException, AmazonServiceException;
-
+*/
 
     /**
      * <p>
@@ -183,9 +183,9 @@ public interface AmazonS3 {
      *             If any errors occurred in Amazon S3 while processing the
      *             request.
      */
-    public void setObjectRedirectLocation(String bucketName, String key, String newRedirectLocation)
+/*    public void setObjectRedirectLocation(String bucketName, String key, String newRedirectLocation)
             throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * <p>
      * Returns a list of summary information about the objects in the specified
@@ -400,9 +400,9 @@ public interface AmazonS3 {
      * @see AmazonS3Client#listObjects(String, String)
      * @see AmazonS3Client#listObjects(ListObjectsRequest)
      */
-    public ObjectListing listNextBatchOfObjects(ObjectListing previousObjectListing)
+/*    public ObjectListing listNextBatchOfObjects(ObjectListing previousObjectListing)
             throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * <p>
      * Returns a list of summary information about the versions in the specified
@@ -497,9 +497,9 @@ public interface AmazonS3 {
      * @see AmazonS3Client#listVersions(ListVersionsRequest)
      * @see AmazonS3Client#listVersions(String, String, String, String, String, Integer)
      */
-    public VersionListing listNextBatchOfVersions(VersionListing previousVersionListing)
+/*    public VersionListing listNextBatchOfVersions(VersionListing previousVersionListing)
         throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * <p>
      * Returns a list of summary information about the versions in the specified
@@ -747,9 +747,9 @@ public interface AmazonS3 {
      *             If any errors occurred in Amazon S3 while processing the
      *             request.
      */
-    public Owner getS3AccountOwner() throws AmazonClientException,
+ /*   public Owner getS3AccountOwner() throws AmazonClientException,
             AmazonServiceException;
-
+*/
     /**
      * Checks if the specified bucket exists. Amazon S3 buckets are named in a
      * global namespace; use this method to determine if a specified
@@ -772,9 +772,9 @@ public interface AmazonS3 {
      *
      * @see AmazonS3#createBucket(CreateBucketRequest)
      */
-    public boolean doesBucketExist(String bucketName)
+/*    public boolean doesBucketExist(String bucketName)
         throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * <p>
      * Returns a list of all Amazon S3 buckets that the
@@ -867,8 +867,10 @@ public interface AmazonS3 {
      *
      * @see Region
      */
-  //  public String getBucketLocation(String bucketName) throws AmazonClientException,
-  //          AmazonServiceException;
+
+   /* public String getBucketLocation(String bucketName) throws AmazonClientException,
+            AmazonServiceException;
+   */
 
     /**
      * <p>
@@ -905,8 +907,10 @@ public interface AmazonS3 {
      *
      * @see Region
      */
-  //  public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
-      //  throws AmazonClientException, AmazonServiceException;
+
+  /*  public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
+        throws AmazonClientException, AmazonServiceException;
+  */
 
     /**
      * <p>
@@ -2653,7 +2657,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve lifecycle
      *            configuration.
      */
-    public BucketLifecycleConfiguration getBucketLifecycleConfiguration(String bucketName);
+  //  public BucketLifecycleConfiguration getBucketLifecycleConfiguration(String bucketName);
 
     /**
      * Sets the lifecycle configuration for the specified bucket.
@@ -2665,7 +2669,7 @@ public interface AmazonS3 {
      *            The new lifecycle configuration for this bucket, which
      *            completely replaces any existing configuration.
      */
-    public void setBucketLifecycleConfiguration(String bucketName, BucketLifecycleConfiguration bucketLifecycleConfiguration);
+  //  public void setBucketLifecycleConfiguration(String bucketName, BucketLifecycleConfiguration bucketLifecycleConfiguration);
 
     /**
      * Removes the lifecycle configuration for the bucket specified.
@@ -2674,7 +2678,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to remove the lifecycle
      *            configuration.
      */
-    public void deleteBucketLifecycleConfiguration(String bucketName);
+  //  public void deleteBucketLifecycleConfiguration(String bucketName);
 
     /**
      * Gets the cross origin configuration for the specified bucket, or null if no
@@ -2684,7 +2688,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve cross origin
      *            configuration.
      */
-    public BucketCrossOriginConfiguration getBucketCrossOriginConfiguration(String bucketName);
+   // public BucketCrossOriginConfiguration getBucketCrossOriginConfiguration(String bucketName);
 
     /**
      * Sets the cross origin configuration for the specified bucket.
@@ -2696,7 +2700,7 @@ public interface AmazonS3 {
      * 			  The new cross origin configuration for this bucket, which
      *            completely replaces any existing configuration.
      */
-    public void setBucketCrossOriginConfiguration(String bucketName, BucketCrossOriginConfiguration bucketCrossOriginConfiguration);
+  //  public void setBucketCrossOriginConfiguration(String bucketName, BucketCrossOriginConfiguration bucketCrossOriginConfiguration);
 
     /**
      * Delete the cross origin configuration for the specified bucket.
@@ -2705,7 +2709,9 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve cross origin
      *            configuration.
      */
-    //public void deleteBucketCrossOriginConfiguration(String bucketName);
+
+  //  public void deleteBucketCrossOriginConfiguration(String bucketName);
+
 
     /**
      * Gets the tagging configuration for the specified bucket, or null if no
@@ -2715,7 +2721,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve tagging
      *            configuration.
      */
-    public BucketTaggingConfiguration getBucketTaggingConfiguration(String bucketName);
+   // public BucketTaggingConfiguration getBucketTaggingConfiguration(String bucketName);
 
     /**
      * Sets the tagging configuration for the specified bucket.
@@ -2727,7 +2733,7 @@ public interface AmazonS3 {
      *            The new tagging configuration for this bucket, which
      *            completely replaces any existing configuration.
      */
-    public void setBucketTaggingConfiguration(String bucketName, BucketTaggingConfiguration bucketTaggingConfiguration);
+ //   public void setBucketTaggingConfiguration(String bucketName, BucketTaggingConfiguration bucketTaggingConfiguration);
 
     /**
      * Removes the Tagging configuration for the bucket specified.
@@ -2736,7 +2742,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to remove the tagging
      *            configuration.
      */
-    public void deleteBucketTaggingConfiguration(String bucketName);
+   // public void deleteBucketTaggingConfiguration(String bucketName);
 
     /**
      * Gets the notification configuration for the specified bucket.
@@ -2768,9 +2774,9 @@ public interface AmazonS3 {
      *             If any errors occurred in Amazon S3 while processing the
      *             request.
      */
-    public BucketNotificationConfiguration getBucketNotificationConfiguration(String bucketName)
+ /*   public BucketNotificationConfiguration getBucketNotificationConfiguration(String bucketName)
         throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * Sets the notification configuration for the specified bucket.
      * <p>
@@ -2803,9 +2809,9 @@ public interface AmazonS3 {
      *             If any errors occurred in Amazon S3 while processing the
      *             request.
      */
-    public void setBucketNotificationConfiguration(String bucketName, BucketNotificationConfiguration bucketNotificationConfiguration)
+ /*   public void setBucketNotificationConfiguration(String bucketName, BucketNotificationConfiguration bucketNotificationConfiguration)
         throws AmazonClientException, AmazonServiceException;
-
+*/
     /**
      * Returns the website configuration for the specified bucket. Bucket
      * website configuration allows you to host your static websites entirely
@@ -3264,9 +3270,9 @@ public interface AmazonS3 {
      * @see AmazonS3#generatePresignedUrl(String, String, Date, HttpMethod)
      * @see AmazonS3#generatePresignedUrl(GeneratePresignedUrlRequest)
      */
-    public URL generatePresignedUrl(String bucketName, String key, Date expiration)
+/*    public URL generatePresignedUrl(String bucketName, String key, Date expiration)
             throws AmazonClientException;
-
+*/
     /**
      * <p>
      * Returns a pre-signed URL for accessing an Amazon S3 resource.
@@ -3313,9 +3319,9 @@ public interface AmazonS3 {
      * @see AmazonS3#generatePresignedUrl(String, String, Date)
      * @see AmazonS3#generatePresignedUrl(GeneratePresignedUrlRequest)
      */
-    public URL generatePresignedUrl(String bucketName, String key, Date expiration, HttpMethod method)
+/*    public URL generatePresignedUrl(String bucketName, String key, Date expiration, HttpMethod method)
             throws AmazonClientException;
-
+*/
 
     /**
      * <p>
@@ -3360,9 +3366,9 @@ public interface AmazonS3 {
      * @see AmazonS3#generatePresignedUrl(String, String, Date)
      * @see AmazonS3#generatePresignedUrl(String, String, Date, HttpMethod)
      */
-    public URL generatePresignedUrl(GeneratePresignedUrlRequest generatePresignedUrlRequest)
+ /*   public URL generatePresignedUrl(GeneratePresignedUrlRequest generatePresignedUrlRequest)
             throws AmazonClientException;
-
+*/
     /**
      * Initiates a multipart upload and returns an InitiateMultipartUploadResult
      * which contains an upload ID. This upload ID associates all the parts in
@@ -3561,7 +3567,7 @@ public interface AmazonS3 {
      * @return The response metadata for the specified request, or
      *         <code>null</code> if none is available.
      */
-    public S3ResponseMetadata getCachedResponseMetadata(AmazonWebServiceRequest request);
+   // public S3ResponseMetadata getCachedResponseMetadata(AmazonWebServiceRequest request);
 
     /**
      * Restore an object, which was transitioned to Amazon Glacier from Amazon
@@ -3583,9 +3589,9 @@ public interface AmazonS3 {
      *
      * @see AmazonS3Client#restoreObject(String, String, int)
      */
-    public void restoreObject(RestoreObjectRequest copyGlacierObjectRequest)
+   /* public void restoreObject(RestoreObjectRequest copyGlacierObjectRequest)
             throws AmazonServiceException;
-
+   */
     /**
      * Restore an object, which was transitioned to Amazon Glacier from Amazon
      * S3 when it was expired, into Amazon S3 again. This copy is by nature temporary
@@ -3609,7 +3615,7 @@ public interface AmazonS3 {
      *
      * @see AmazonS3Client#restoreObject(RestoreObjectRequest)
      */
-    public void restoreObject(String bucketName, String key, int expirationInDays)
+ /*   public void restoreObject(String bucketName, String key, int expirationInDays)
             throws AmazonServiceException;
-
+*/
 }
