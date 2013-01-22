@@ -867,8 +867,8 @@ public interface AmazonS3 {
      *
      * @see Region
      */
-    public String getBucketLocation(String bucketName) throws AmazonClientException,
-            AmazonServiceException;
+  //  public String getBucketLocation(String bucketName) throws AmazonClientException,
+  //          AmazonServiceException;
 
     /**
      * <p>
@@ -905,8 +905,8 @@ public interface AmazonS3 {
      *
      * @see Region
      */
-    public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
-        throws AmazonClientException, AmazonServiceException;
+  //  public String getBucketLocation(GetBucketLocationRequest getBucketLocationRequest)
+      //  throws AmazonClientException, AmazonServiceException;
 
     /**
      * <p>
@@ -2705,7 +2705,7 @@ public interface AmazonS3 {
      *            The name of the bucket for which to retrieve cross origin
      *            configuration.
      */
-    public void deleteBucketCrossOriginConfiguration(String bucketName);
+    //public void deleteBucketCrossOriginConfiguration(String bucketName);
 
     /**
      * Gets the tagging configuration for the specified bucket, or null if no
