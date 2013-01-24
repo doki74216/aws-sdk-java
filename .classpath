@@ -4,14 +4,14 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/aspectjweaver-1.5.0.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/httpclient-4.1.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/httpcore-4.1.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/jackson-all-1.6.9.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/junit-4.10.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/spring.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/spring-context-3.0.7.RELEASE.jar"/>
-	<classpathentry kind="lib" path="D:/workspace/Local repo/aws-sdk-java-Repos/lib/spring-test-3.0.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/aspectjweaver-1.5.0.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/httpclient-4.1.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/httpcore-4.1.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/jackson-all-1.6.9.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/spring.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/spring-context-3.0.7.RELEASE.jar"/>
+	<classpathentry kind="lib" path="D:/Local Repo/aws-sdk-java/lib/spring-test-3.0.7.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
