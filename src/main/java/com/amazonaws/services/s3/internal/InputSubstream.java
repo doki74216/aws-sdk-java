@@ -55,6 +55,7 @@ public final class InputSubstream extends FilterInputStream {
     	this.closeSourceStream = closeSourceStream;
     }
 
+
     @Override
     public int read() throws IOException {
         byte[] b = new byte[1];

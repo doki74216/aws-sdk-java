@@ -45,9 +45,9 @@ public abstract class AmazonWebServiceRequest {
 	 *            The optional AWS security credentials to use for this request,
 	 *            overriding the default credentials set at the client level.
 	 */
-    public void setRequestCredentials(AWSCredentials credentials) {
+  /*  public void setRequestCredentials(AWSCredentials credentials) {
 		this.credentials = credentials;
-    }
+    }*/
 
 	/**
 	 * Returns the optional credentials to use to sign this request, overriding
@@ -56,9 +56,9 @@ public abstract class AmazonWebServiceRequest {
 	 * @return The optional credentials to use to sign this request, overriding
 	 *         the default credentials set at the client level.
 	 */
-    public AWSCredentials getRequestCredentials() {
+/*    public AWSCredentials getRequestCredentials() {
     	return credentials;
-    }
+    }*/
 
 
     /**

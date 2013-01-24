@@ -2547,7 +2547,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
      *            The optional sub-resource being requested as part of the
      *            request (e.g. "location", "acl", "logging", or "torrent").
      */
-    protected <T> void presignRequest(Request<T> request, HttpMethod methodName,
+ /*   protected <T> void presignRequest(Request<T> request, HttpMethod methodName,
             String bucketName, String key, Date expiration, String subResource) {
         // Run any additional request handlers if present
         if (requestHandlers != null) {
@@ -2577,7 +2577,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             request.addParameter(Headers.SECURITY_TOKEN, value);
             request.getHeaders().remove(Headers.SECURITY_TOKEN);
         }
-    }
+    }*/
 
     /**
      * Converts the current endpoint set for this client into virtual addressing
@@ -2963,9 +2963,9 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         AWSCredentials credentials = awsCredentialsProvider.getCredentials();
         AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
-        if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
+      /*  if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
             credentials = originalRequest.getRequestCredentials();
-        }
+        }*/
 
         ExecutionContext executionContext = createExecutionContext();
         executionContext.setSigner(createSigner(request, bucket, key));
