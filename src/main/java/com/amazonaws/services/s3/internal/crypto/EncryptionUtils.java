@@ -630,7 +630,7 @@ public class EncryptionUtils {
     public static InputStream getEncryptedInputStream(UploadPartRequest request, Cipher symmetricCipher) {
     	try {
     		InputStream originalInputStream = request.getInputStream();
-    		if (request.getFile() != null) {
+   		if (request.getFile() != null) {
                 originalInputStream = new InputSubstream(new RepeatableFileInputStream(request.getFile()),
                         request.getFileOffset(), request.getPartSize(), request.isLastPart());
     		}
