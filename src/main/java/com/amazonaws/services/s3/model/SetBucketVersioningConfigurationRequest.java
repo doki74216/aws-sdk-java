@@ -242,9 +242,9 @@ public class SetBucketVersioningConfigurationRequest extends AmazonWebServiceReq
      * @see SetBucketVersioningConfigurationRequest#setMfa(MultiFactorAuthentication)
      * @see SetBucketVersioningConfigurationRequest#withMfa(MultiFactorAuthentication)
      */
-    public MultiFactorAuthentication getMfa() {
+  /*  public MultiFactorAuthentication getMfa() {
         return mfa;
-    }
+    }*/
 
     /**
      * Sets the optional Multi-Factor Authentication information to include with
@@ -265,9 +265,9 @@ public class SetBucketVersioningConfigurationRequest extends AmazonWebServiceReq
      * @see SetBucketVersioningConfigurationRequest#getMfa()
      * @see SetBucketVersioningConfigurationRequest#withMfa(MultiFactorAuthentication)
      */
-    public void setMfa(MultiFactorAuthentication mfa) {
+   /* public void setMfa(MultiFactorAuthentication mfa) {
         this.mfa = mfa;
-    }
+    }*/
 
     /**
      * Sets the optional Multi-Factor Authentication information to include with
@@ -292,9 +292,9 @@ public class SetBucketVersioningConfigurationRequest extends AmazonWebServiceReq
      * @see SetBucketVersioningConfigurationRequest#getMfa()
      * @see SetBucketVersioningConfigurationRequest#setMfa(MultiFactorAuthentication)       
      */
-    public SetBucketVersioningConfigurationRequest withMfa(MultiFactorAuthentication mfa) {
+   /* public SetBucketVersioningConfigurationRequest withMfa(MultiFactorAuthentication mfa) {
         setMfa(mfa);
         return this;
-    }
+    }*/
 
 }

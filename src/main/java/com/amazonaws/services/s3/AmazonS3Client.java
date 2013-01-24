@@ -1054,12 +1054,12 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             request.addHeader(Headers.STORAGE_CLASS, putObjectRequest.getStorageClass());
         }
 
-        if (putObjectRequest.getRedirectLocation() != null) {
+       /* if (putObjectRequest.getRedirectLocation() != null) {
             request.addHeader(Headers.REDIRECT_LOCATION, putObjectRequest.getRedirectLocation());
             if (input == null) {
                 input = new ByteArrayInputStream(new byte[0]);
             }
-        }
+        }*/
 
         // Use internal interface to differentiate 0 from unset.
         if (metadata.getRawMetadata().get(Headers.CONTENT_LENGTH) == null) {
@@ -1157,9 +1157,9 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         PutObjectResult result = new PutObjectResult();
         result.setETag(returnedMetadata.getETag());
         result.setVersionId(returnedMetadata.getVersionId());
-        result.setServerSideEncryption(returnedMetadata.getServerSideEncryption());
-        result.setExpirationTime(returnedMetadata.getExpirationTime());
-        result.setExpirationTimeRuleId(returnedMetadata.getExpirationTimeRuleId());
+       // result.setServerSideEncryption(returnedMetadata.getServerSideEncryption());
+       //result.setExpirationTime(returnedMetadata.getExpirationTime());
+       //result.setExpirationTimeRuleId(returnedMetadata.getExpirationTimeRuleId());
 
         return result;
     }
@@ -1288,9 +1288,9 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         copyObjectResult.setETag(copyObjectResultHandler.getETag());
         copyObjectResult.setLastModifiedDate(copyObjectResultHandler.getLastModified());
         copyObjectResult.setVersionId(copyObjectResultHandler.getVersionId());
-        copyObjectResult.setServerSideEncryption(copyObjectResultHandler.getServerSideEncryption());
-        copyObjectResult.setExpirationTime(copyObjectResultHandler.getExpirationTime());
-        copyObjectResult.setExpirationTimeRuleId(copyObjectResultHandler.getExpirationTimeRuleId());
+       // copyObjectResult.setServerSideEncryption(copyObjectResultHandler.getServerSideEncryption());
+      //  copyObjectResult.setExpirationTime(copyObjectResultHandler.getExpirationTime());
+       // copyObjectResult.setExpirationTimeRuleId(copyObjectResultHandler.getExpirationTimeRuleId());
 
         return copyObjectResult;
     }
@@ -1418,7 +1418,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         copyPartResult.setPartNumber(copyPartRequest.getPartNumber());
         copyPartResult.setLastModifiedDate(copyObjectResultHandler.getLastModified());
         copyPartResult.setVersionId(copyObjectResultHandler.getVersionId());
-        copyPartResult.setServerSideEncryption(copyObjectResultHandler.getServerSideEncryption());
+       // copyPartResult.setServerSideEncryption(copyObjectResultHandler.getServerSideEncryption());
 
         return copyPartResult;
     }
@@ -1530,10 +1530,10 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             "The bucket name parameter must be specified when setting versioning configuration");
         assertParameterNotNull(versioningConfiguration,
             "The bucket versioning parameter must be specified when setting versioning configuration");
-        if (versioningConfiguration.isMfaDeleteEnabled() != null) {
+      /*  if (versioningConfiguration.isMfaDeleteEnabled() != null) {
             assertParameterNotNull(setBucketVersioningConfigurationRequest.getMfa(),
                 "The MFA parameter must be specified when changing MFA Delete status in the versioning configuration");
-        }
+        }*/
 
         Request<SetBucketVersioningConfigurationRequest> request = createRequest(bucketName, null, setBucketVersioningConfigurationRequest, HttpMethodName.PUT);
         request.addParameter("versioning", null);
@@ -1541,11 +1541,11 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         /*--Add 2012-12-27--*/
         request.addHeader(Headers.CONTENT_TYPE, "text/plain");
         
-        if (versioningConfiguration.isMfaDeleteEnabled() != null) {
+       /* if (versioningConfiguration.isMfaDeleteEnabled() != null) {
             if (setBucketVersioningConfigurationRequest.getMfa() != null) {
                 populateRequestWithMfaDetails(request, setBucketVersioningConfigurationRequest.getMfa());
             }
-        }
+        }*/
 
         byte[] bytes = bucketConfigurationXmlFactory.convertToXmlByteArray(versioningConfiguration);
         request.setContent(new ByteArrayInputStream(bytes));
@@ -2322,7 +2322,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             UploadPartResult result = new UploadPartResult();
             result.setETag(metadata.getETag());
             result.setPartNumber(partNumber);
-            result.setServerSideEncryption(metadata.getServerSideEncryption());
+            //result.setServerSideEncryption(metadata.getServerSideEncryption());
             return result;
         } catch (AmazonClientException ace) {
             fireProgressEvent(progressListener, ProgressEvent.PART_FAILED_EVENT_CODE);
@@ -2619,10 +2619,10 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             }
         }
 
-        Date expirationTime = metadata.getExpirationTime();
+        /*Date expirationTime = metadata.getExpirationTime();
         if (expirationTime != null) {
             request.addHeader(Headers.EXPIRES, String.valueOf((expirationTime.getTime() - System.currentTimeMillis())));
-        }
+        }*/
 
         Map<String, String> userMetadata = metadata.getUserMetadata();
         if (userMetadata != null) {
@@ -2697,9 +2697,10 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         addStringListHeader(request, Headers.COPY_SOURCE_IF_NO_MATCH,
                 copyObjectRequest.getNonmatchingETagConstraints());
 
-        if (copyObjectRequest.getAccessControlList() != null) {
+       /* if (copyObjectRequest.getAccessControlList() != null) {
             addAclHeaders(request, copyObjectRequest.getAccessControlList());
-        } else if (copyObjectRequest.getCannedAccessControlList() != null) {
+        } else*/ 
+        if (copyObjectRequest.getCannedAccessControlList() != null) {
             request.addHeader(Headers.S3_CANNED_ACL,
                     copyObjectRequest.getCannedAccessControlList().toString());
         }
@@ -2708,9 +2709,9 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             request.addHeader(Headers.STORAGE_CLASS, copyObjectRequest.getStorageClass());
         }
 
-        if (copyObjectRequest.getRedirectLocation() != null) {
+       /* if (copyObjectRequest.getRedirectLocation() != null) {
             request.addHeader(Headers.REDIRECT_LOCATION, copyObjectRequest.getRedirectLocation());
-        }
+        }*/
 
         ObjectMetadata newObjectMetadata = copyObjectRequest.getNewObjectMetadata();
         if (newObjectMetadata != null) {

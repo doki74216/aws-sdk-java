@@ -594,9 +594,9 @@ public class CopyObjectRequest extends AmazonWebServiceRequest {
      * Returns the optional access control list for the new object. If
      * specified, cannedAcl will be ignored.
      */
-    public AccessControlList getAccessControlList() {
+ /*   public AccessControlList getAccessControlList() {
         return accessControlList;
-    }
+    }*/
     
     /**
      * Sets the optional access control list for the new object. If specified,
@@ -605,9 +605,9 @@ public class CopyObjectRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new object.
      */
-    public void setAccessControlList(AccessControlList accessControlList) {
+   /* public void setAccessControlList(AccessControlList accessControlList) {
         this.accessControlList = accessControlList;
-    }
+    }*/
     
     /**
      * Sets the optional access control list for the new object. If specified,
@@ -617,10 +617,10 @@ public class CopyObjectRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new object.
      */
-    public CopyObjectRequest withAccessControlList(AccessControlList accessControlList) {
+  /*  public CopyObjectRequest withAccessControlList(AccessControlList accessControlList) {
         setAccessControlList(accessControlList);
         return this;
-    }
+    }*/
 
     /**
      * Gets the optional object metadata to set for the new, copied object.
@@ -955,16 +955,16 @@ public class CopyObjectRequest extends AmazonWebServiceRequest {
 	 * @param redirectLocation
 	 *            The redirect location for the newly copied object.
 	 */
-	public void setRedirectLocation(String redirectLocation) {
+	/*public void setRedirectLocation(String redirectLocation) {
 		this.redirectLocation = redirectLocation;
-	}
+	}*/
 
 	/**
 	 * Gets the optional redirect location for the newly copied object.
 	 */
-	public String getRedirectLocation() {
+	/*public String getRedirectLocation() {
 		return this.redirectLocation;
-	}
+	}*/
 
 	/**
 	 * Sets the optional redirect location for the newly copied object.Returns this
@@ -973,9 +973,9 @@ public class CopyObjectRequest extends AmazonWebServiceRequest {
 	 * @param redirectLocation
 	 *            The redirect location for the newly copied object.
 	 */
-	public CopyObjectRequest withRedirectLocation(String redirectLocation) {
+	/*public CopyObjectRequest withRedirectLocation(String redirectLocation) {
 		this.redirectLocation = redirectLocation;
 		return this;
-	}
+	}*/
 
 }

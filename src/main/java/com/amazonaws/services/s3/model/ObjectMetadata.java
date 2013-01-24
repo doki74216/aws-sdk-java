@@ -573,9 +573,9 @@ public class ObjectMetadata implements ServerSideEncryptionResult, ObjectExpirat
      * Returns the server-side encryption algorithm for the object, or null if
      * none was used.
      */
-    public String getServerSideEncryption() {
+ /*   public String getServerSideEncryption() {
         return (String)metadata.get(Headers.SERVER_SIDE_ENCRYPTION);
-    }
+    }*/
 
     /**
      * Sets the server-side encryption algorithm for the object.
@@ -583,16 +583,16 @@ public class ObjectMetadata implements ServerSideEncryptionResult, ObjectExpirat
      * @param serverSideEncryption
      *            The server-side encryption algorithm for the object.
      */
-    public void setServerSideEncryption(String serverSideEncryption) {
+/*    public void setServerSideEncryption(String serverSideEncryption) {
         metadata.put(Headers.SERVER_SIDE_ENCRYPTION, serverSideEncryption);
-    }
+    }*/
 
     /**
      * Returns the expiration time for this object, or null if it doesn't expire.
      */
-    public Date getExpirationTime() {
+ /*   public Date getExpirationTime() {
         return expirationTime;
-    }
+    }*/
 
     /**
      * Sets the expiration time for the object. Note: the expiration date is
@@ -602,17 +602,17 @@ public class ObjectMetadata implements ServerSideEncryptionResult, ObjectExpirat
      * @param expirationTime
      *            The expiration time for the object.
      */
-    public void setExpirationTime(Date expirationTime) {
+  /*  public void setExpirationTime(Date expirationTime) {
         this.expirationTime = expirationTime;
-    }
+    }*/
 
     /**
      * Returns the {@link BucketLifecycleConfiguration} rule ID for this
      * object's expiration, or null if it doesn't expire.
      */
-    public String getExpirationTimeRuleId() {
+ /*   public String getExpirationTimeRuleId() {
         return expirationTimeRuleId;
-    }
+    }*/
 
     /**
      * Sets the {@link BucketLifecycleConfiguration} rule ID for this object's
@@ -621,25 +621,25 @@ public class ObjectMetadata implements ServerSideEncryptionResult, ObjectExpirat
      * @param expirationTimeRuleId
      *            The rule ID for this object's expiration
      */
-    public void setExpirationTimeRuleId(String expirationTimeRuleId) {
+ /*   public void setExpirationTimeRuleId(String expirationTimeRuleId) {
         this.expirationTimeRuleId = expirationTimeRuleId;
-    }
+    }*/
 
     /**
      * For internal use only. Sets the boolean value which indicates whether
      * there is ongoing restore request. Not intended to be called by external
      * code.
      */
-    public void setOngoingRestore(boolean ongoingRestore) {
+    /*public void setOngoingRestore(boolean ongoingRestore) {
         this.ongoingRestore = Boolean.valueOf(ongoingRestore);
-    }
+    }*/
 
 
     /**
      *  Returns the boolean value which indicates whether there is ongoing restore request.
      */
-    public Boolean getOngoingRestore() {
+    /*public Boolean getOngoingRestore() {
         return this.ongoingRestore;
-    }
+    }*/
 
 }

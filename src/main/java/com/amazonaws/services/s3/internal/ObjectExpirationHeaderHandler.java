@@ -47,8 +47,8 @@ public class ObjectExpirationHeaderHandler<T extends ObjectExpirationResult> imp
     public void handle(T result, HttpResponse response) {
         String expirationHeader = response.getHeaders().get(Headers.EXPIRATION);
         if ( expirationHeader != null ) {
-            result.setExpirationTime(parseDate(expirationHeader));
-            result.setExpirationTimeRuleId(parseRuleId(expirationHeader));
+           // result.setExpirationTime(parseDate(expirationHeader));
+           // result.setExpirationTimeRuleId(parseRuleId(expirationHeader));
         }
     }
 

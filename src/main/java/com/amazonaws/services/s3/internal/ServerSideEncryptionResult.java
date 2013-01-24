@@ -27,7 +27,7 @@ public interface ServerSideEncryptionResult {
     /**
      * Returns the server-side encryption algorithm for the response, or null if none was used.
      */
-    public String getServerSideEncryption();
+//    public String getServerSideEncryption();
 
     /**
      * Sets the server-side encryption algorithm for the response.
@@ -35,6 +35,6 @@ public interface ServerSideEncryptionResult {
      * @param serverSideEncryption
      *            The server-side encryption algorithm for the response.
      */
-    public void setServerSideEncryption(String serverSideEncryption);
+//    public void setServerSideEncryption(String serverSideEncryption);
     
 }

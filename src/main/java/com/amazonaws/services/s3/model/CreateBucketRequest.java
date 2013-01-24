@@ -187,9 +187,9 @@ public class CreateBucketRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new bucket.
      */
-    public void setAccessControlList(AccessControlList accessControlList) {
+/*    public void setAccessControlList(AccessControlList accessControlList) {
         this.accessControlList = accessControlList;
-    }
+    }*/
     
     /**
      * Sets the optional access control list for the new bucket. If specified,
@@ -199,9 +199,9 @@ public class CreateBucketRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new bucket.
      */
-    public CreateBucketRequest withAccessControlList(AccessControlList accessControlList) {
+/*    public CreateBucketRequest withAccessControlList(AccessControlList accessControlList) {
         setAccessControlList(accessControlList);
         return this;
-    }
+    }*/
 
 }

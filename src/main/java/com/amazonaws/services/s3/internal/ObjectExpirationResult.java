@@ -30,7 +30,7 @@ public interface ObjectExpirationResult {
      * Returns the expiration date of the object, or null if the object is not
      * configured to expire.
      */
-    public Date getExpirationTime();
+//    public Date getExpirationTime();
 
     /**
      * Sets the expiration date of the object.
@@ -38,7 +38,7 @@ public interface ObjectExpirationResult {
      * @param expiration
      *            The date the object will expire.
      */
-    public void setExpirationTime(Date expiration);
+//    public void setExpirationTime(Date expiration);
 
     /**
      * Returns the bucket lifecycle configuration rule ID for the expiration of
@@ -46,7 +46,7 @@ public interface ObjectExpirationResult {
      *
      * @see Rule#getId()
      */
-    public String getExpirationTimeRuleId();
+//    public String getExpirationTimeRuleId();
 
     /**
      * Sets the bucket lifecycle configuration rule ID for the expiration of
@@ -55,6 +55,6 @@ public interface ObjectExpirationResult {
      * @param ruleId
      *            The rule ID of this object's expiration configuration
      */
-    public void setExpirationTimeRuleId(String ruleId);
+//    public void setExpirationTimeRuleId(String ruleId);
 
 }

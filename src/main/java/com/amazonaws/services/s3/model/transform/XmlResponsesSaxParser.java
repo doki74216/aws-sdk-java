@@ -1034,7 +1034,7 @@ public class XmlResponsesSaxParser {
             this.versionId = versionId;
         }
 
-        @Override
+   /*     @Override
         public String getServerSideEncryption() {
             return serverSideEncryption;
         }
@@ -1047,22 +1047,22 @@ public class XmlResponsesSaxParser {
         @Override
         public Date getExpirationTime() {
             return expirationTime;
-        }
+        }*/
 
-        @Override
+     /*   @Override
         public void setExpirationTime(Date expirationTime) {
             this.expirationTime = expirationTime;
-        }
+        }*/
 
-        @Override
+       /* @Override
         public String getExpirationTimeRuleId() {
             return expirationTimeRuleId;
-        }
+        }*/
 
-        @Override
+      /*  @Override
         public void setExpirationTimeRuleId(String expirationTimeRuleId) {
             this.expirationTimeRuleId = expirationTimeRuleId;
-        }
+        }*/
 
         public String getETag() {
             return etag;
@@ -1622,7 +1622,7 @@ public class XmlResponsesSaxParser {
         // Successful completion
         private CompleteMultipartUploadResult result;
 
-        @Override
+  /*      @Override
         public String getServerSideEncryption() {
             if ( result != null )
                 return result.getServerSideEncryption();
@@ -1634,45 +1634,45 @@ public class XmlResponsesSaxParser {
         public void setServerSideEncryption(String serverSideEncryption) {
             if ( result != null )
                 result.setServerSideEncryption(serverSideEncryption);
-        }
+        }*/
 
         /**
          * @see com.amazonaws.services.s3.model.CompleteMultipartUploadResult#getExpirationTime()
          */
-        @Override
+     /*   @Override
         public Date getExpirationTime() {
             if ( result != null )
                 return result.getExpirationTime();
             return null;
-        }
+        }*/
 
         /**
          * @see com.amazonaws.services.s3.model.CompleteMultipartUploadResult#setExpirationTime(java.util.Date)
          */
-        @Override
+     /*   @Override
         public void setExpirationTime(Date expirationTime) {
             if ( result != null )
                 result.setExpirationTime(expirationTime);
-        }
+        }*/
 
         /**
          * @see com.amazonaws.services.s3.model.CompleteMultipartUploadResult#getExpirationTimeRuleId()
          */
-        @Override
+    /*    @Override
         public String getExpirationTimeRuleId() {
             if ( result != null )
                 return result.getExpirationTimeRuleId();
             return null;
-        }
+        }*/
 
         /**
          * @see com.amazonaws.services.s3.model.CompleteMultipartUploadResult#setExpirationTimeRuleId(java.lang.String)
          */
-        @Override
+      /*  @Override
         public void setExpirationTimeRuleId(String expirationTimeRuleId) {
             if ( result != null )
                 result.setExpirationTimeRuleId(expirationTimeRuleId);
-        }
+        }*/
 
         // Error during completion
         private AmazonS3Exception ase;

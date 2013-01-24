@@ -133,7 +133,8 @@ public interface AmazonS3 {
      * @throws IllegalArgumentException
      *             If the specified endpoint is not a valid URL endpoint.
      */
-    public void setEndpoint(String endpoint);
+	
+    //public void setEndpoint(String endpoint);
 
     /**
      * <p>

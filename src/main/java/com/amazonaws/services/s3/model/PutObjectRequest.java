@@ -649,9 +649,9 @@ public class PutObjectRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new object.
      */
-    public void setAccessControlList(AccessControlList accessControlList) {
+  /*  public void setAccessControlList(AccessControlList accessControlList) {
         this.accessControlList = accessControlList;
-    }
+    }*/
 
     /**
      * Sets the optional access control list for the new object. If specified,
@@ -661,10 +661,10 @@ public class PutObjectRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new object.
      */
-    public PutObjectRequest withAccessControlList(AccessControlList accessControlList) {
+  /*  public PutObjectRequest withAccessControlList(AccessControlList accessControlList) {
         setAccessControlList(accessControlList);
         return this;
-    }
+    }*/
 
     /**
      * Gets the input stream containing the data to be uploaded to Amazon S3.
@@ -736,16 +736,16 @@ public class PutObjectRequest extends AmazonWebServiceRequest {
      * @param redirectLocation
      *            The redirect location for the new object.
      */
-    public void setRedirectLocation(String redirectLocation) {
+  /*  public void setRedirectLocation(String redirectLocation) {
         this.redirectLocation = redirectLocation;
-    }
+    }*/
 
     /**
      * Gets the optional redirect location for the new object.
      */
-    public String getRedirectLocation() {
+  /*  public String getRedirectLocation() {
         return this.redirectLocation;
-    }
+    }*/
 
     /**
      * Sets the optional redirect location for the new object.Returns this
@@ -754,10 +754,10 @@ public class PutObjectRequest extends AmazonWebServiceRequest {
      * @param redirectLocation
      *            The redirect location for the new object.
      */
-    public PutObjectRequest withRedirectLocation(String redirectLocation) {
+  /*  public PutObjectRequest withRedirectLocation(String redirectLocation) {
         this.redirectLocation = redirectLocation;
         return this;
-    }
+    }*/
 
     /**
      * Sets the optional progress listener for receiving updates for object

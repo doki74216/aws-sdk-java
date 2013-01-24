@@ -29,7 +29,7 @@ public interface ObjectRestoreResult {
      * Returns the expiration date of the object, or null if the object is not
      * configured to expire.
      */
-    public Date getExpirationTime();
+//    public Date getExpirationTime();
 
     /**
      * Sets the expiration date of the object.
@@ -37,16 +37,16 @@ public interface ObjectRestoreResult {
      * @param expiration
      *            The date the object will expire.
      */
-    public void setExpirationTime(Date expiration);
+//    public void setExpirationTime(Date expiration);
 
     /**
      * Sets a boolean value which indicates there is an ongoing restore request.
      * @param ongoingRestore
      */
-    public void setOngoingRestore(boolean ongoingRestore);
+   //public void setOngoingRestore(boolean ongoingRestore);
 
     /**
      * Returns then  boolean value which indicates there is an ongoing restore request.
      */
-    public Boolean getOngoingRestore();
+   // public Boolean getOngoingRestore();
 }

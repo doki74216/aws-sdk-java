@@ -88,13 +88,13 @@ public abstract class AmazonWebServiceClient {
      * @throws IllegalArgumentException
      *             If any problems are detected with the specified endpoint.
      */
-    public void setEndpoint(String endpoint) throws IllegalArgumentException {
-        /*
+   public void setEndpoint(String endpoint) throws IllegalArgumentException {
+         /*
          * If the endpoint doesn't explicitly specify a protocol to use, then
          * we'll defer to the default protocol specified in the client
          * configuration.
          */
-        if (endpoint.contains("://") == false) {
+         if (endpoint.contains("://") == false) {
             endpoint = clientConfiguration.getProtocol().toString() + "://" + endpoint;
         }
 

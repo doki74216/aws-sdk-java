@@ -29,6 +29,6 @@ public class ServerSideEncryptionHeaderHandler <T extends ServerSideEncryptionRe
      */
     @Override
     public void handle(T result, HttpResponse response) {
-        result.setServerSideEncryption(response.getHeaders().get(Headers.SERVER_SIDE_ENCRYPTION));
+       // result.setServerSideEncryption(response.getHeaders().get(Headers.SERVER_SIDE_ENCRYPTION));
     }
 }
