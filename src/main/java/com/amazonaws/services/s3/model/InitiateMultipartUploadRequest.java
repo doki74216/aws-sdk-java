@@ -244,10 +244,10 @@ public class InitiateMultipartUploadRequest extends AmazonWebServiceRequest {
      * Returns the optional access control list for the new upload. If
      * specified, cannedAcl will be ignored.
      */
-    public AccessControlList getAccessControlList() {
+/*    public AccessControlList getAccessControlList() {
         return accessControlList;
     }
-    
+*/    
     /**
      * Sets the optional access control list for the new upload. If specified,
      * cannedAcl will be ignored.
@@ -255,10 +255,10 @@ public class InitiateMultipartUploadRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new upload.
      */
-    public void setAccessControlList(AccessControlList accessControlList) {
+  /*  public void setAccessControlList(AccessControlList accessControlList) {
         this.accessControlList = accessControlList;
     }
-    
+  */  
     /**
      * Sets the optional access control list for the new upload. If specified,
      * cannedAcl will be ignored. Returns this {@link InitiateMultipartUploadRequest},
@@ -267,11 +267,11 @@ public class InitiateMultipartUploadRequest extends AmazonWebServiceRequest {
      * @param accessControlList
      *            The access control list for the new upload.
      */
-    public InitiateMultipartUploadRequest withAccessControlList(AccessControlList accessControlList) {
+/*   public InitiateMultipartUploadRequest withAccessControlList(AccessControlList accessControlList) {
         setAccessControlList(accessControlList);
         return this;
     }
-
+*/
     /**
      * Returns the optional storage class to use when storing this upload's data
      * in S3. If not specified, the default storage class is used.
@@ -370,17 +370,17 @@ public class InitiateMultipartUploadRequest extends AmazonWebServiceRequest {
 	 * @param redirectLocation
 	 *            The redirect location for the new object.
 	 */
-	public void setRedirectLocation(String redirectLocation) {
+/*	public void setRedirectLocation(String redirectLocation) {
 		this.redirectLocation = redirectLocation;
 	}
-
+*/
 	/**
 	 * Gets the optional redirect location for the new object.
 	 */
-	public String getRedirectLocation() {
+/*	public String getRedirectLocation() {
 		return this.redirectLocation;
 	}
-
+*/
 	/**
 	 * Sets the optional redirect location for the new object. Returns this
 	 * {@link InitiateMultipartUploadRequest}, enabling additional method calls to be chained
@@ -388,9 +388,9 @@ public class InitiateMultipartUploadRequest extends AmazonWebServiceRequest {
 	 * @param redirectLocation
 	 *            The redirect location for the new object.
 	 */
-	public InitiateMultipartUploadRequest withRedirectLocation(String redirectLocation) {
+/*	public InitiateMultipartUploadRequest withRedirectLocation(String redirectLocation) {
 		this.redirectLocation = redirectLocation;
 		return this;
 	}
-
+*/
 }

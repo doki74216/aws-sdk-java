@@ -2149,13 +2149,13 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         if (initiateMultipartUploadRequest.getStorageClass() != null)
             request.addHeader(Headers.STORAGE_CLASS, initiateMultipartUploadRequest.getStorageClass().toString());
 
-        if (initiateMultipartUploadRequest.getRedirectLocation() != null) {
+/*        if (initiateMultipartUploadRequest.getRedirectLocation() != null) {
             request.addHeader(Headers.REDIRECT_LOCATION, initiateMultipartUploadRequest.getRedirectLocation());
         }
-
-        if ( initiateMultipartUploadRequest.getAccessControlList() != null ) {
+*/
+/*        if ( initiateMultipartUploadRequest.getAccessControlList() != null ) {
             addAclHeaders(request, initiateMultipartUploadRequest.getAccessControlList());
-        } else if ( initiateMultipartUploadRequest.getCannedACL() != null ) {
+        } else */if ( initiateMultipartUploadRequest.getCannedACL() != null ) {
             request.addHeader(Headers.S3_CANNED_ACL, initiateMultipartUploadRequest.getCannedACL().toString());
         }
 
@@ -2294,12 +2294,12 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             }
         }
 
-        ProgressListener progressListener = uploadPartRequest.getProgressListener();
+ /*       ProgressListener progressListener = uploadPartRequest.getProgressListener();
         if (progressListener != null) {
             inputStream = new ProgressReportingInputStream(inputStream, progressListener);
             fireProgressEvent(progressListener, ProgressEvent.PART_STARTED_EVENT_CODE);
         }
-
+*/
         try {
             request.setContent(inputStream);
             ObjectMetadata metadata = invoke(request, new S3MetadataResponseHandler(), bucketName, key);
@@ -2309,15 +2309,15 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
                 byte[] clientSideHash = BinaryUtils.fromBase64(contentMd5);
                 byte[] serverSideHash = BinaryUtils.fromHex(metadata.getETag());
 
-                if (!Arrays.equals(clientSideHash, serverSideHash)) {
+               /* if (!Arrays.equals(clientSideHash, serverSideHash)) {
                     fireProgressEvent(progressListener, ProgressEvent.FAILED_EVENT_CODE);
                     throw new AmazonClientException("Unable to verify integrity of data upload.  " +
                             "Client calculated content hash didn't match hash calculated by Amazon S3.  " +
                             "You may need to delete the data stored in Amazon S3.");
-                }
+                }*/
             }
 
-            fireProgressEvent(progressListener, ProgressEvent.PART_COMPLETED_EVENT_CODE);
+ //           fireProgressEvent(progressListener, ProgressEvent.PART_COMPLETED_EVENT_CODE);
 
             UploadPartResult result = new UploadPartResult();
             result.setETag(metadata.getETag());
@@ -2325,7 +2325,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
             result.setServerSideEncryption(metadata.getServerSideEncryption());
             return result;
         } catch (AmazonClientException ace) {
-            fireProgressEvent(progressListener, ProgressEvent.PART_FAILED_EVENT_CODE);
+ //           fireProgressEvent(progressListener, ProgressEvent.PART_FAILED_EVENT_CODE);
             throw ace;
         } finally {
             if (inputStream != null) {
