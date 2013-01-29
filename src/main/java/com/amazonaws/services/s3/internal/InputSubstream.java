@@ -46,7 +46,7 @@ public final class InputSubstream extends FilterInputStream {
 	 *            True if the wrapped InputStream should be closed when this
 	 *            InputSubstream is closed.
 	 */
-    public InputSubstream(InputStream in, long offset, long length, boolean closeSourceStream) {
+	public InputSubstream(InputStream in, long offset, long length, boolean closeSourceStream) {
     	super(in);
     	
     	this.currentPosition = 0;
