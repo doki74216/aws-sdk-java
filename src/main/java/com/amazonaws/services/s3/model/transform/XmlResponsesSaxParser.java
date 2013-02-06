@@ -1881,184 +1881,92 @@ public class XmlResponsesSaxParser {
             text = new StringBuilder();
         }
 
-        /** 
-         * original config
-         * if (name.equals("ListMultipartUploadsResult")) {
-         *         result = new MultipartUploadListing();
-         *             } else if (name.equals("Bucket")) {//1
-         *                 } else if (name.equals("KeyMarker")) {//5
-         *                     } else if (name.equals("Delimiter")) { 
-         *                         } else if (name.equals("UploadIdMarker")) {//6
-         *                             } else if (name.equals("NextKeyMarker")) {//7
-         *                                 } else if (name.equals("NextUploadIdMarker")) {//8
-         *                                     } else if (name.equals("MaxUploads")) {//9
-         *                                        // } else if (name.equals("Prefix")) { //11
-         *                                            } else if (name.equals("IsTruncated")) {//10
-         *                                                } else if (name.equals("Upload")) { //12
-         *                                                        currentMultipartUpload = new MultipartUpload();
-         *                                                            } else if (name.equals("Key")) { //12-1
-         *                                                                } else if (name.equals("UploadId")) { //12-2
-         *                                                                    } else if (name.equals("Owner")) { //4
-         *                                                                            currentOwner = new Owner();
-         *                                                                                } else if (name.equals("Initiator")) { //12-3
-         *                                                                                        currentInitiator = new Owner(); //12/4
-         *                                                                                            } else if (name.equals("ID")) { //2
-         *                                                                                                } else if (name.equals("DisplayName")) {//3
-         *                                                                                                    } else if (name.equals("StorageClass")) {//12-5
-         *                                                                                                        } else if (name.equals("Initiated")) {//12-6
-         *                                                                                                            } else if (name.equals("CommonPrefixes")) {
-         *                                                                                                                    inCommonPrefixes = true;
-         *                                                                                                                        }
-         *                                                                                                                        */
         @Override
         public void startElement(String uri, String name, String qName, Attributes attrs) {
-        	/*--Add 2012-01-02--*/
             if (name.equals("ListMultipartUploadsResult")) {
                 result = new MultipartUploadListing();
-            } else if (name.equals("Bucket")) {//1
-            } else if (name.equals("ID")) { //2
-            } else if (name.equals("DisplayName")) {//3
-            } else if (name.equals("Owner")) { //4
-            	currentMultipartUpload = new MultipartUpload();
-            	currentOwner = new Owner();
-            } else if (name.equals("KeyMarker")) {//5 
-            } else if (name.equals("Delimiter")) { //??
-            } else if (name.equals("UploadIdMarker")) {//6
-            } else if (name.equals("NextKeyMarker")) {//7
-            } else if (name.equals("NextUploadIdMarker")) {//8
-            } else if (name.equals("MaxUploads")) {//9
-            } else if (name.equals("IsTruncated")) {//10
-            } else if (name.equals("Prefix")) { //11
-            } else if (name.equals("Upload")) { //12
-                //currentMultipartUpload = new MultipartUpload();
-            } else if (name.equals("Key")) { //12-1
-            } else if (name.equals("UploadId")) { //12-2
-            } else if (name.equals("Initiator")) { //12-3
-                currentInitiator = new Owner(); //12/4
-            } else if (name.equals("StorageClass")) {//12-5
-            } else if (name.equals("Initiated")) {//12-6
-            } else if (name.equals("CommonPrefixes")) {//13
+            } else if (name.equals("Bucket")) {
+            } else if (name.equals("KeyMarker")) {
+            } else if (name.equals("Delimiter")) {
+            } else if (name.equals("UploadIdMarker")) {
+            } else if (name.equals("NextKeyMarker")) {
+            } else if (name.equals("NextUploadIdMarker")) {
+            } else if (name.equals("MaxUploads")) {
+            } else if (name.equals("IsTruncated")) {
+            } else if (name.equals("Upload")) {
+                currentMultipartUpload = new MultipartUpload();
+            } else if (name.equals("Key")) {
+            } else if (name.equals("UploadId")) {
+            } else if (name.equals("Owner")) {
+                currentOwner = new Owner();
+            } else if (name.equals("Initiator")) {
+                currentInitiator = new Owner();
+            } else if (name.equals("ID")) {
+            } else if (name.equals("DisplayName")) {
+            } else if (name.equals("StorageClass")) {
+            } else if (name.equals("Initiated")) {
+            } else if (name.equals("CommonPrefixes")) {
                 inCommonPrefixes = true;
             }
-            /*--Add 2012-01-02--*/
             text.setLength(0);
         }
 
-        /* Original config 
-        *  if (name.equals("ListMultipartUploadsResult")) {
-        *  } else if (name.equals("Bucket")) {
-        *      result.setBucketName(text.toString());
-        *  } else if (name.equals("KeyMarker")) {
-        *      result.setKeyMarker(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("Delimiter")) {
-        *      result.setDelimiter(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("Prefix") && inCommonPrefixes == false) {
-        *      result.setPrefix(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("Prefix") && inCommonPrefixes == true) {
-        *      result.getCommonPrefixes().add(text.toString());
-        *  } else if (name.equals("UploadIdMarker")) {
-        *      result.setUploadIdMarker(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("NextKeyMarker")) {
-        *      result.setNextKeyMarker(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("NextUploadIdMarker")) {
-        *      result.setNextUploadIdMarker(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("MaxUploads")) {
-        *      result.setMaxUploads(Integer.parseInt(text.toString()));
-        *  } else if (name.equals("IsTruncated")) {
-        *      result.setTruncated(Boolean.parseBoolean(text.toString()));
-        *  } else if (name.equals("Upload")) {
-        *      result.getMultipartUploads().add(currentMultipartUpload);
-        *  } else if (name.equals("Key")) {
-        *      currentMultipartUpload.setKey(text.toString());
-        *  } else if (name.equals("UploadId")) {
-        *      currentMultipartUpload.setUploadId(text.toString());
-        *  } else if (name.equals("Owner")) {
-        *      currentMultipartUpload.setOwner(currentOwner); 
-        *      currentOwner = null;
-        *  } else if (name.equals("Initiator")) {
-        *      currentMultipartUpload.setInitiator(currentInitiator);
-        *      currentInitiator = null;
-        *  } else if (name.equals("ID") && currentOwner != null) {
-        *      currentOwner.setId(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("DisplayName") && currentOwner != null) {
-        *      currentOwner.setDisplayName(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("ID") && currentInitiator != null) {
-        *      currentInitiator.setId(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("DisplayName") && currentInitiator != null) {
-        *      currentInitiator.setDisplayName(checkForEmptyString(text.toString()));
-        *  } else if (name.equals("StorageClass")) {
-        *      currentMultipartUpload.setStorageClass(text.toString());
-        *  } else if (name.equals("Initiated")) {
-        *      try {
-        *          currentMultipartUpload.setInitiated(ServiceUtils.parseIso8601Date(text.toString()));
-        *      } catch (ParseException e) {
-        *          throw new SAXException(
-        *                  "Non-ISO8601 date for Initiated in initiate multipart upload result: "
-        *                  + text.toString(), e);
-        *      }
-        *  } else if (name.equals("CommonPrefixes")) {
-        *      inCommonPrefixes = false;
-        *  }
-        */
         @Override
         public void endElement(String uri, String name, String qName) throws SAXException {
-        	/*--Add 2012-01-02--*/
-        	   if (name.equals("ListMultipartUploadsResult")) {
-               } else if (name.equals("Bucket")) {//1
-                   result.setBucketName(text.toString());
-               } else if (name.equals("ID")) { //2
-               } else if (name.equals("DisplayName")) { //3
-               } else if (name.equals("Owner")) {//4
-                   currentMultipartUpload.setOwner(currentOwner); 
-                   currentOwner = null;
-               } else if (name.equals("KeyMarker")) {//5
-                   result.setKeyMarker(checkForEmptyString(text.toString()));
-               } else if (name.equals("Delimiter")) {//??
-                   result.setDelimiter(checkForEmptyString(text.toString()));
-               } else if (name.equals("UploadIdMarker")) {//6
-                   result.setUploadIdMarker(checkForEmptyString(text.toString()));
-               } else if (name.equals("NextKeyMarker")) {//7
-                   result.setNextKeyMarker(checkForEmptyString(text.toString()));
-               } else if (name.equals("NextUploadIdMarker")) {//8
-                   result.setNextUploadIdMarker(checkForEmptyString(text.toString()));
-               } else if (name.equals("MaxUploads")) {//9
-                   result.setMaxUploads(Integer.parseInt(text.toString()));
-               } else if (name.equals("IsTruncated")) {//10
-                   result.setTruncated(Boolean.parseBoolean(text.toString()));
-               } else if (name.equals("Prefix") && inCommonPrefixes == false) {//11
-                   result.setPrefix(checkForEmptyString(text.toString()));
-               } else if (name.equals("Prefix") && inCommonPrefixes == true) {//11
-                   result.getCommonPrefixes().add(text.toString());
-               } else if (name.equals("Upload")) {
-                   result.getMultipartUploads().add(currentMultipartUpload);
-               } else if (name.equals("Key")) {
-                   currentMultipartUpload.setKey(text.toString());
-               } else if (name.equals("UploadId")) {
-                   currentMultipartUpload.setUploadId(text.toString());
-               } else if (name.equals("Initiator")) {
-                   currentMultipartUpload.setInitiator(currentInitiator);
-                   currentInitiator = null;
-               } else if (name.equals("ID") && currentOwner != null) {
-                   currentOwner.setId(checkForEmptyString(text.toString()));
-               } else if (name.equals("DisplayName") && currentOwner != null) {
-                   currentOwner.setDisplayName(checkForEmptyString(text.toString()));
-               } else if (name.equals("ID") && currentInitiator != null) {
-                   currentInitiator.setId(checkForEmptyString(text.toString()));
-               } else if (name.equals("DisplayName") && currentInitiator != null) {
-                   currentInitiator.setDisplayName(checkForEmptyString(text.toString()));
-               } else if (name.equals("StorageClass")) {
-                   currentMultipartUpload.setStorageClass(text.toString());
-               } else if (name.equals("Initiated")) {
-                   try {
-                       currentMultipartUpload.setInitiated(ServiceUtils.parseIso8601Date(text.toString()));
-                   } catch (ParseException e) {
-                       throw new SAXException(
-                               "Non-ISO8601 date for Initiated in initiate multipart upload result: "
-                               + text.toString(), e);
-                   }
-               } else if (name.equals("CommonPrefixes")) {
-                   inCommonPrefixes = false;
-               }
+            if (name.equals("ListMultipartUploadsResult")) {
+            } else if (name.equals("Bucket")) {
+                result.setBucketName(text.toString());
+            } else if (name.equals("KeyMarker")) {
+                result.setKeyMarker(checkForEmptyString(text.toString()));
+            } else if (name.equals("Delimiter")) {
+                result.setDelimiter(checkForEmptyString(text.toString()));
+            } else if (name.equals("Prefix") && inCommonPrefixes == false) {
+                result.setPrefix(checkForEmptyString(text.toString()));
+            } else if (name.equals("Prefix") && inCommonPrefixes == true) {
+                result.getCommonPrefixes().add(text.toString());
+            } else if (name.equals("UploadIdMarker")) {
+                result.setUploadIdMarker(checkForEmptyString(text.toString()));
+            } else if (name.equals("NextKeyMarker")) {
+                result.setNextKeyMarker(checkForEmptyString(text.toString()));
+            } else if (name.equals("NextUploadIdMarker")) {
+                result.setNextUploadIdMarker(checkForEmptyString(text.toString()));
+            } else if (name.equals("MaxUploads")) {
+                result.setMaxUploads(Integer.parseInt(text.toString()));
+            } else if (name.equals("IsTruncated")) {
+                result.setTruncated(Boolean.parseBoolean(text.toString()));
+            } else if (name.equals("Upload")) {
+                result.getMultipartUploads().add(currentMultipartUpload);
+            } else if (name.equals("Key")) {
+                currentMultipartUpload.setKey(text.toString());
+            } else if (name.equals("UploadId")) {
+                currentMultipartUpload.setUploadId(text.toString());
+            } else if (name.equals("Owner")) {
+                currentMultipartUpload.setOwner(currentOwner);
+                currentOwner = null;
+            } else if (name.equals("Initiator")) {
+                currentMultipartUpload.setInitiator(currentInitiator);
+                currentInitiator = null;
+            } else if (name.equals("ID") && currentOwner != null) {
+                currentOwner.setId(checkForEmptyString(text.toString()));
+            } else if (name.equals("DisplayName") && currentOwner != null) {
+                currentOwner.setDisplayName(checkForEmptyString(text.toString()));
+            } else if (name.equals("ID") && currentInitiator != null) {
+                currentInitiator.setId(checkForEmptyString(text.toString()));
+            } else if (name.equals("DisplayName") && currentInitiator != null) {
+                currentInitiator.setDisplayName(checkForEmptyString(text.toString()));
+            } else if (name.equals("StorageClass")) {
+                currentMultipartUpload.setStorageClass(text.toString());
+            } else if (name.equals("Initiated")) {
+                try {
+                    currentMultipartUpload.setInitiated(ServiceUtils.parseIso8601Date(text.toString()));
+                } catch (ParseException e) {
+                    throw new SAXException(
+                            "Non-ISO8601 date for Initiated in initiate multipart upload result: "
+                            + text.toString(), e);
+                }
+            } else if (name.equals("CommonPrefixes")) {
+                inCommonPrefixes = false;
+            }
         }
 
         @Override
