@@ -82,7 +82,7 @@ public class UploadPartRequestFactory {
         remainingBytes -= partSize;
         
         request.setLastPart(isLastPart);
-        request.setProgressListener(putObjectRequest.getProgressListener());
+//        request.setProgressListener(putObjectRequest.getProgressListener());
 
         return request;
     }

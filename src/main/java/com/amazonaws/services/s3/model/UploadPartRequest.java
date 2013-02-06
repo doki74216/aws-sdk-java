@@ -458,10 +458,10 @@ public class UploadPartRequest extends AmazonWebServiceRequest {
      * @param progressListener
      *            The new progress listener.
      */
-    public void setProgressListener(ProgressListener progressListener) {
+/*    public void setProgressListener(ProgressListener progressListener) {
         this.progressListener = progressListener;
     }
-
+*/
     /**
      * Returns the optional progress listener for receiving updates about object
      * upload status.
@@ -469,10 +469,10 @@ public class UploadPartRequest extends AmazonWebServiceRequest {
      * @return the optional progress listener for receiving updates about object
      *         upload status.
      */
-    public ProgressListener getProgressListener() {
+ /*   public ProgressListener getProgressListener() {
         return progressListener;
     }
-
+*/
     /**
      * Sets the optional progress listener for receiving updates about object
      * upload status, and returns this updated object so that additional method
@@ -483,11 +483,11 @@ public class UploadPartRequest extends AmazonWebServiceRequest {
      *
      * @return This updated UploadPartRequest object.
      */
-    public UploadPartRequest withProgressListener(ProgressListener progressListener) {
+ /*   public UploadPartRequest withProgressListener(ProgressListener progressListener) {
         setProgressListener(progressListener);
         return this;
     }
-
+*/
 	/**
 	 * Returns true if the creator of this request has indicated this part is
 	 * the last part being uploaded in a multipart upload.
