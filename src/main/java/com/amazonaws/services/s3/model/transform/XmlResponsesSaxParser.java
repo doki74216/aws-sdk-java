@@ -1112,62 +1112,6 @@ public class XmlResponsesSaxParser {
 
             if (name.equals("LastModified")) {
                 try {
-                	/*--Add 2013-01-03--*/
-                	String month="";
-                	String day="";
-                	String year="";
-                	String time="";                	
-                	elementText = elementText.substring(4);
-                	elementText = elementText.replace("GMT+08:00", "-");               	
-                	Pattern pat;
-                	Matcher mat;
-                	Boolean found;
-                	
-                	pat = Pattern.compile("[0-9][0-9]");
-                	mat = pat.matcher(elementText);
-                	found=mat.find();
-                	if(found==true)
-                	{day = mat.group();}
-                	
-                	pat = Pattern.compile("[a-zA-Z][a-z][a-z]");
-                	mat = pat.matcher(elementText);
-                	found=mat.find();
-                	if(found==true)
-                	{
-                		month = mat.group();
-                		if(month.equalsIgnoreCase("Jan")){month="01";}
-                    	else if(month.equalsIgnoreCase("Feb")){month="02";}
-                    	else if(month.equalsIgnoreCase("Mar")){month="03";}
-                    	else if(month.equalsIgnoreCase("Apr")){month="04";}
-                    	else if(month.equalsIgnoreCase("May")){month="05";}
-                    	else if(month.equalsIgnoreCase("Jun")){month="06";}
-                    	else if(month.equalsIgnoreCase("Jul")){month="07";}
-                    	else if(month.equalsIgnoreCase("Aug")){month="08";}
-                    	else if(month.equalsIgnoreCase("Sep")){month="09";}
-                    	else if(month.equalsIgnoreCase("Oct")){month="10";}
-                    	else if(month.equalsIgnoreCase("Nov")){month="11";}
-                    	else if(month.equalsIgnoreCase("Dec")){month="12";}
-                	}
-                	
-                	pat = Pattern.compile("[0-9][0-9][0-9][0-9]");
-                	mat = pat.matcher(elementText);
-                	found=mat.find();
-                	if(found==true)
-                	{year = mat.group();}
-                	
-                	pat = Pattern.compile("[0-9][0-9][:][0-9][0-9][:][0-9][0-9]");
-                	mat = pat.matcher(elementText);
-                	found=mat.find();
-                	if(found==true)
-                	{time = mat.group();}
-                	
-                   	DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                	Date temp = dateFormat.parse(time);
-                	temp.setHours(temp.getHours()-8);
-                	time = temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getMinutes();
-                	
-                	elementText = year + '-' + month + '-' + day + 'T' + time + 'Z';
-                	/*--Add 2013-01-03--*/
                     lastModified = ServiceUtils.parseIso8601Date(elementText);
                 } catch (ParseException e) {
                     throw new RuntimeException(
@@ -1386,29 +1330,31 @@ public class XmlResponsesSaxParser {
                 versionListing.setPrefix(checkForEmptyString(text.toString()));
             } else if (insideCommonPrefixes && name.equals("Prefix")) {
                 versionListing.getCommonPrefixes().add(checkForEmptyString(text.toString()));
-            } else if (name.equals("Delimiter")) {
-                versionListing.setDelimiter(checkForEmptyString(text.toString()));
+            } else if (name.equals("CommonPrefixes")) {
+                insideCommonPrefixes = false;
             } else if (name.equals("KeyMarker")) {
                 versionListing.setKeyMarker(checkForEmptyString(text.toString()));
             } else if (name.equals("VersionIdMarker")) {
                 versionListing.setVersionIdMarker(checkForEmptyString(text.toString()));
             } else if (name.equals("MaxKeys")) {
                 versionListing.setMaxKeys(Integer.parseInt(text.toString()));
+            } else if (name.equals("Delimiter")) {
+                versionListing.setDelimiter(checkForEmptyString(text.toString()));
             } else if (name.equals("NextKeyMarker")) {
                 versionListing.setNextKeyMarker(text.toString());
             } else if (name.equals("NextVersionIdMarker")) {
                 versionListing.setNextVersionIdMarker(text.toString());
             } else if (name.equals("IsTruncated")) {
-                versionListing.setTruncated("true".equals(text.toString())); 
+                versionListing.setTruncated("true".equals(text.toString()));
             } else if (name.equals("Version")) {
                 assert(currentVersionSummary != null);
                 versionSummaries.add(currentVersionSummary);
                 currentVersionSummary = null;
-           } else if (name.equals("DeleteMarker")) {
+            } else if (name.equals("DeleteMarker")) {
                 assert(currentVersionSummary != null);
                 versionSummaries.add(currentVersionSummary);
                 currentVersionSummary = null;
-             } else if (name.equals("Key")) {
+            } else if (name.equals("Key")) {
                 assert(currentVersionSummary != null);
                 currentVersionSummary.setKey(text.toString());
             } else if (name.equals("VersionId")) {
@@ -1420,46 +1366,7 @@ public class XmlResponsesSaxParser {
             } else if (name.equals("LastModified")) {
                 assert(currentVersionSummary != null);
                 try {
-                	String elementText = text.toString();
-                   	String month="";
-                	String day="";
-                	String year="";
-                	String time="";                	
-                	elementText = elementText.replace("GMT+08:00", "-");               	
-                	Pattern pat;
-                	Matcher mat;
-                	Boolean found;
-                	
-                	pat = Pattern.compile("[-][0-9][0-9][-][0-9][0-9]");
-                	mat = pat.matcher(elementText);
-                	found=mat.find();
-                	if(found==true)
-                	{
-                		String temp = mat.group();
-                		month = temp.substring(1, 3);
-                		day = temp.substring(4, 6);
-                		
-                	}
-                	
-                	pat = Pattern.compile("[0-9][0-9][0-9][0-9]");
-                	mat = pat.matcher(elementText);
-                	found=mat.find();
-                	if(found==true)
-                	{year = mat.group();}
-                	
-                	pat = Pattern.compile("[0-9][0-9][:][0-9][0-9][:][0-9][0-9]");
-                	mat = pat.matcher(elementText);
-                	found=mat.find();
-                	if(found==true)
-                	{time = mat.group();}
-                	
-                   	DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                	Date temp = dateFormat.parse(time);
-                	temp.setHours(temp.getHours()-8);
-                	time = temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getMinutes();
-                	
-                	elementText = year + '-' + month + '-' + day + 'T' + time + 'Z';
-                    currentVersionSummary.setLastModified(ServiceUtils.parseIso8601Date(elementText));
+                    currentVersionSummary.setLastModified(ServiceUtils.parseIso8601Date(text.toString()));
                 } catch (ParseException e) {
                     throw new SAXException(
                         "Non-ISO8601 date for LastModified in copy object output: "
@@ -1486,8 +1393,6 @@ public class XmlResponsesSaxParser {
             } else if (name.equals("DisplayName")) {
                 assert(owner != null);
                 owner.setDisplayName(text.toString());
-            } else if (name.equals("CommonPrefixes")) {
-            	insideCommonPrefixes = false;
             } else {
                 log.warn("Ignoring unexpected tag <"+name+">");
             }
