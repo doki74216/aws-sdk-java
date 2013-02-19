@@ -580,8 +580,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         }
 
         /*----------Add 2012/12/17--------------------------*/
-        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
-        
+        //request.addHeader(Headers.CONTENT_TYPE, "text/plain");        
         /*
          * If we're talking to a region-specific endpoint other than the US, we
          * *must* specify a location constraint. Try to derive the region from
@@ -1539,8 +1538,8 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         request.addParameter("versioning", null);
 
         /*--Add 2012-12-27--*/
-        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
-        
+       //request.addHeader(Headers.CONTENT_TYPE, "text/plain");  
+       
        /* if (versioningConfiguration.isMfaDeleteEnabled() != null) {
             if (setBucketVersioningConfigurationRequest.getMfa() != null) {
                 populateRequestWithMfaDetails(request, setBucketVersioningConfigurationRequest.getMfa());
@@ -1878,7 +1877,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         request.addParameter("logging", null);
         
         /*--2012-12-27-*/
-        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
+        //request.addHeader(Headers.CONTENT_TYPE, "text/plain");
 
         byte[] bytes = bucketConfigurationXmlFactory.convertToXmlByteArray(loggingConfiguration);
         request.setContent(new ByteArrayInputStream(bytes));
@@ -1908,7 +1907,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
         request.addParameter("policy", null);
         
         /*--2012-12-27--*/
-        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
+        //request.addHeader(Headers.CONTENT_TYPE, "text/plain");
         
         request.setContent(new ByteArrayInputStream(ServiceUtils.toByteArray(policyText)));
 
@@ -2261,7 +2260,7 @@ public class AmazonS3Client extends AmazonWebServiceClient implements AmazonS3 {
 
         request.addHeader(Headers.CONTENT_LENGTH, Long.toString(partSize));
         /*--Add 2012-01-02--*/
-        request.addHeader(Headers.CONTENT_TYPE, "text/plain");
+        //request.addHeader(Headers.CONTENT_TYPE, "text/plain");
 
         InputStream inputStream = null;
         if (uploadPartRequest.getInputStream() != null) {
