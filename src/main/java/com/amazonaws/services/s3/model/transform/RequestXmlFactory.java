@@ -39,9 +39,8 @@ public class RequestXmlFactory {
     public static byte[] convertToXmlByteArray(List<PartETag> partETags) {
         XmlWriter xml = new XmlWriter();
         /*--Add 201201-02--*/
-        xml.start("CompleteMultipartUpload", "xmlns", Constants.XML_NAMESPACE);
-        
-       // xml.start("CompleteMultipartUpload");
+       // xml.start("CompleteMultipartUpload", "xmlns", Constants.XML_NAMESPACE);
+        xml.start("CompleteMultipartUpload");
         if (partETags != null) {
             Collections.sort(partETags, new Comparator<PartETag>() {
                 public int compare(PartETag tag1, PartETag tag2) {
