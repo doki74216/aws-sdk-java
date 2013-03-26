@@ -116,10 +116,11 @@ class HttpClientFactory {
          * register a new scheme for HTTPS that won't cause self-signed certs to
          * error out.
          */
-        if (System.getProperty("com.amazonaws.sdk.disableCertChecking") != null) {
+        //Modified by chiehWen, fix HTTPS problem
+        //if (System.getProperty("com.amazonaws.sdk.disableCertChecking") != null) {
             Scheme sch = new Scheme("https", 443, new TrustingSocketFactory());
             httpClient.getConnectionManager().getSchemeRegistry().register(sch);
-        }
+        //}
 
         /* Set proxy if configured */
         String proxyHost = config.getProxyHost();
